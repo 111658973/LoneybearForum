@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>verify</title>
+</head>
+<body>
+    <form>
+        <input type="text">
+        <img onclick="getvCode()" id="verifyimg">
+    </form>
+
+    <script type="text/javascript">
+        getvCode();
+
+        /**
+         * 获取验证码
+         * 将验证码写到login.html页面的id = verifyimg 的地方
+         */
+        function getvCode() {
+            document.getElementById("verifyimg").src = timestamp("http://localhost:8080/GetVerifycode");
+        }
+        //为url添加时间戳
+        function timestamp(url) {
+            var getTimestamp = new Date().getTime();
+            if (url.indexOf("?") > -1) {
+                url = url + "&timestamp=" + getTimestamp
+            } else {
+                url = url + "?timestamp=" + getTimestamp
+            }
+            return url;
+        };
+
+
+    </script>
+
+</body>
+</html>

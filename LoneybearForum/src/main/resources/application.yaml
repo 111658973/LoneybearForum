@@ -1,0 +1,23 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true    #delte和put方法开启··
+  redis:
+    host: 127.0.0.1 # redis服务器地址
+    port: 6379 # 默认端口就是6379 可不配置
+    #password: root # redis服务器连接密码（默认为空）
+    database: 0 #使用Redis0号库
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/spring_cache?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  session:
+    timeout: 0      #设置seesion不会过期，除非主动登出
+  elasticsearch:
+    rest:
+      uris: http://127.0.0.1:9200
+
+
+
+

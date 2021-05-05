@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="../static/css/Pagescss.css">
+<!--    <link rel="stylesheet" href="../static/css/bootstrap.css">-->
+<!--    <link rel="stylesheet" href="../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.css">-->
+</head>
+<body>
+<div id="Vue">
+    <div class="logo_location">
+        <a href="/homepage" class="logo_link_search" id="logo_link"><img class="logo"
+                                                                         src="../static/images/page_icons/run.gif">LoneybearForom</a>
+    </div>
+    <div id="" class="Search_warpper">
+        <div id="wrapper" class="search_frame">
+            <input id="search" type="text" class="Main_search_input_text" placeholder="搜索内容">
+            <!--                <input type="button" class="Main_search_input_button" value="搜索" onclick="a()" >-->
+        </div>
+        <div class="Main_search_content display_none" id="content">
+            <div class="switch_box" style="padding-left: 50px">
+                <a id="button_user" class="none_underline_link switch_button_style" onclick="ButtonCheck(this);showResult(1)">仅查看用户</a>
+                <a id="button_zone" class="none_underline_link switch_button_style" onclick="ButtonCheck(this);showResult(2)">仅查看分区</a>
+                <a id="button_reply" class="none_underline_link switch_button_style" onclick="ButtonCheck(this);showResult(3)">仅查看回复</a>
+
+            </div>
+            <div class="search_wrapers">
+                <div id="search_users" class="search_users_wrapper" v-if="is_user_empty"  v-show="show_res_user">
+                    <div class="search_box_col search_box_user" v-for="u in userList">
+                        <div><img class="search_icon" :src="u.iconUrl" alt="用户"></div>
+                        <a class="search_link none_underline_link" v-html="u.hightlightnick"></a>
+                        <label>level:{{u.level}}</label>
+                    </div>
+
+                </div>
+                <div id="search_zones" class="search_zones_wrapper" v-if="is_zone_empty" v-show="show_res_zone">
+                    <div class="search_box_col search_box_zone"  v-for="z in zoneList">
+                        <div><a :href="['/zone/'+z.zurl]"> <img class="search_icon" :src="z.ziconUrl" alt="zone"></a></div>
+                        <a class="search_link none_underline_link" :href="['/zone/'+z.zurl]" v-html="z.hightlightzname"></a>
+                        <div v-html="z.hightlightzintroduction"></div>
+                        <label>关注:{{z.likeNumber}}&nbsp;&nbsp;&nbsp;帖子:{{z.postcount}}</label>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="search_post_wrapper" v-if="is_floor_empty" v-show="show_res_floor">
+                    <div class="search_post_box" v-for="f in floorList">
+<!--                        <div class="zone_post_up_warpper">-->
+<!--                            <div class="zone_post_user_icon_box"><img class="zone_post_user_icon_img"-->
+<!--                                                                      src=""></div>-->
+<!--                            <div class="zone_post_user_data_box">-->
+<!--                                <a href="#" class="zone_post_user_data_name"></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="zone_post_text_warpper">
+                            <a style="color: #1b5fcc" class="zone_post_content_tittle none_underline_link" :href="['/post/'+f.pid]" v-html="f.hightlighttittle"></a>
+                            <div v-html="f.hightlightcontent"></div>
+                        </div>
+                        <div class="zone_post_down_warpper">
+                            <div class="zone_post_user_data_box">
+                                <label>分区:</label><a :href="['/zone/'+ f.zurl]" class="zone_post_user_data_name">{{f.zname}}</a>
+                                <label class="margin_left_20px">作者:</label><a href="#" class="">{{f.author}}</a>
+                                <label class="margin_left_20px">修改时间:</label><a class="">{{f.ftime}}</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="footer">
+            copyright©2021 Loneybear All Right Reserved
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.js"></script>
+<script src="../static/js/jquery.serializejson.js"></script>
+<script src="../static/js/vue.global.js"></script>
+<script src="../static/js/axios.min.js"></script>
+<script src="../static/js/Search.js"></script>
+<script src="../static/js/Common.js"></script>
+<script src="../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.js"></script>
+<script src="../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table-locale-all.js"></script>
+<script src="../static/bootstrap-3.3.7-dist/plugins/Bootstrap-select v1.13.9/bootstrap-select.min.js"></script>
+<script>
+
+
+</script>
+</body>
+</html>

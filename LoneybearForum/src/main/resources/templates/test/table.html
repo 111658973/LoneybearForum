@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tableTest</title>
+    <link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/css/bootstrap.css">
+
+
+
+</head>
+<body>
+  <table id="table" data-locale="zh-CN"></table>
+
+  <table id="table_good" data-locale="zh-CN"></table>
+
+
+    <table data-toggle="table"></table>
+</body>
+
+<script src="../../static/js/jquery-3.6.0.js"></script>
+<script src="../../static/js/jquery.serializejson.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.js"></script>
+<!-- Latest compiled and minified Locales -->
+<script src="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table-locale-all.js"></script>
+<script>
+    $('#table').bootstrapTable({
+        // url: '/http://127.0.0.1:8080/GetNewestPostDataLimit/10',         //请求后台的URL（*）
+        // method: 'get',
+        classes:"table table-striped table-hover",
+        theadClasses:"thead thead-light",
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+        sortOrder: "asc",
+        pageNumber:1,                       //初始化加载第一页，默认第一页
+        pageSize: 10,                       //每页的记录行数（*）
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        // // searchOnEnterKey:true,
+        // // strictSearch: true,
+        showColumns: true,                  //是否显示所有的列
+        showRefresh: true,               //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        showToggle:true,
+        columns: [
+        {
+            field: 'id',
+            title: '编号'
+        }, {
+            field: 'name',
+            title: '用户'
+        }, {
+            field: 'price',
+            title: '价格'
+        }, {
+            field: 'reason',
+            title: '原因'
+        }, {
+            field: 'date',
+            title: '时间'
+        }],
+        // searchText:true,
+
+
+
+        data: [{
+            id: 1,
+            name: 'Item 1',
+            price: '$1222',
+            reasson:"1",
+            date:"2121-1-1"
+        }, {
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },,{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },
+        ]
+    })
+    $('#table_good').bootstrapTable({
+        // url: '/http://127.0.0.1:8080/GetNewestPostDataLimit/10',         //请求后台的URL（*）
+        // method: 'get',
+        // ajax:
+        classes:"table table-striped table-hover",
+        theadClasses:"thead thead-light",
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+        sortOrder: "asc",
+        pageNumber:1,                       //初始化加载第一页，默认第一页
+        pageSize: 10,                       //每页的记录行数（*）
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        // // searchOnEnterKey:true,
+        // // strictSearch: true,
+        showColumns: true,                  //是否显示所有的列
+        showRefresh: true,               //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        showToggle:true,
+        columns: [
+            {
+                field: 'id',
+                title: '编号'
+            }, {
+                field: 'pid',
+                title: '帖子id'
+            }, {
+                field: 'username',
+                title: '发帖人'
+            }, {
+                field: 'tittle',
+                title: '标题'
+            }, {
+                field: 'opration',
+                title: '操作'
+            }],
+        // searchText:true,
+
+
+
+        data: [{
+            id: 1,
+            name: 'Item 1',
+            price: '$1222',
+            reasson:"1",
+            date:"2121-1-1"
+        }, {
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },,{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },{
+            id: 1,
+            name: 'Item 1',
+            price: '$1',
+            reasson:"1",
+            date:"2121-1-1"
+        },
+        ]
+    })
+
+</script>
+</html>

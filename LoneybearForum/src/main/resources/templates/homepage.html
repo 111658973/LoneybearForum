@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+<head>
+    <meta charset="UTF-8">
+    <title>LoneybearForum</title>
+    <link rel="stylesheet" href="../static/css/Pagescss.css">
+    <link rel="stylesheet" href="../static/swiper-master/package/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../static/swiper-master/package/animate.css">
+
+
+</head>
+<body style="background: url(../static/images/background/background_homepage.png);background-size: cover;background-attachment: fixed;">
+    <div id="Vue1" v-if="isShow">
+        <div class="top_bar" >
+            <div v-show="Logined">
+                <a class="top_bar_font" href="#homapage1" onmouseover="showDynamicUserDataFrame();" >用户</a>
+                <a class="top_bar_font" href="#消息" onmouseover="showDynamicMessageFrame();">消息</a>
+            </div>
+            <div v-show="NotLogined" style="text-align: right">
+               <label>请先登陆</label><a href="/login">登陆</a>
+            </div>
+            <!-- <a class="top_bar_font" href="#2">2</a>
+            <a class="top_bar_font" href="#1">1</a> -->
+        </div>
+        <div class="homepage_search_warpper" style=" ">
+
+                <a href="/homepage" class="logo_link_homepage" id="logo_link"><img class="logo" src="../static/images/page_icons/run.gif">LBForum</a>
+                <input class="searchInput" id="homepage_search" type="text" name="main_search" value="" placeholder="搜索内容">
+                <input class="search_button"  type="submit" name="searchButton" value="搜索" onclick="ToSearch()">
+
+        </div>
+        <div class="outter-swiper">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/1.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/2.jpg"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/3.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/4.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/5.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/6.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/7.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/8.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/9.png"
+                                                                              class="swiper-img"></a></div>
+                    <div class="swiper-slide"><a class="swiper_img_link"><img src="../static/images/swiper/10.png"
+                                                                              class="swiper-img"></a></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination" style="margin-right: 5px;"></div>
+            </div>
+
+        </div>
+        <div class="left_narbar" v-if="show_left">
+            <p class="tittle_leftside_1">我的资料</p>
+            <div class="left_bar_user_data_box">
+                <a href="/userdata" ><img class="left_narbar_icon" :src="img_url"></a>
+                <div class="left_narbar_user_data_text">
+                    <a href="/userdata" class="none_underline_link" >{{ nick }}</a>
+                    <div>&nbsp</div>
+                    <div>&nbsp</div>
+                    <div>&nbsp</div>
+                    <div>&nbsp</div>
+                </div>
+
+            </div>
+            <div class="favoriate_zones_warpper_outter">
+                <div class="favoriate_zones_warpper">
+                    <p style="text-align: left;">喜欢的分区</p>
+                    <a v-for="l in user_data.user_favourite_zones"  class="none_underline_link favourite_zones_link" :href="/zone/ + l.zurl">{{ l.zname }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="topic_list_warpper">
+            <div class="topic_tittle_box">
+                <span class="topic_tittle" id="topic_tittle">热门Top10</span>
+                <a href="topic_page" class="topic_tittle_link">查看榜单</a>
+            </div>
+            <ul class="topic_list_ul">
+                <li class="topic_li"><span class="topic_list_image_1" id="topic_li_font1">1</span><a style="color: red" href="https://s.weibo.com/weibo?q=%23不结婚老了真的会很惨吗%23"
+                                                                                                    class="topic_list_link"
+                                                                                                    id="topic_list_link_font">#不结婚老了真的会很惨吗#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_2" id="topic_li_font2">2</span><a style="color: orange;" href="https://s.weibo.com/weibo?q=%23天价片酬是否影响学生的职业观%23"
+                                                                                                    class="topic_list_link"
+                                                                                                    id="topic_list_link_font">#天价片酬是否影响学生的职业观#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_3" id="topic_li_font3">3</span><a style="color: yellowgreen" href="https://s.weibo.com/weibo?q=%23被动式伏弟魔的经历%23"
+                                                                                                    class="topic_list_link"
+                                                                                                    id="topic_list_link_font">#被动式伏弟魔的经历#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font4">4</span><a href="https://s.weibo.com/weibo?q=%23中国空间站有多硬核%23"
+                                                                                                        class="topic_list_link"
+                                                                                                        id="topic_list_link_font">#中国空间站有多硬核#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font5">5</span><a href="https://s.weibo.com/weibo?q=%23如何打破男尊女卑传宗接代等落后观念%23"
+                                                                                                        class="topic_list_link"
+                                                                                                        id="topic_list_link_font">#如何打破男尊女卑传宗接代等落后观念#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font6">6</span><a href="https://s.weibo.com/weibo?q=%23你能接受孩子将来不如自己吗%23"
+                                                                                                        class="topic_list_link"
+                                                                                                        id="topic_list_link_font">#你能接受孩子将来不如自己吗#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font7">7</span><a href="https://s.weibo.com/weibo?q=%23天价阴阳合同为何屡禁不止%23"
+                                                                                                        class="topic_list_link"
+                                                                                                        id="topic_list_link_font">#天价阴阳合同为何屡禁不止#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font8">8</span><a href="https://s.weibo.com/weibo?q=%23特斯拉与中国市场的蜜月期结束了吗%23"
+                                                                                                        class="topic_list_link"
+                                                                                                        id="topic_list_link_font">#特斯拉与中国市场的蜜月期结束了吗#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font9">9</span><a href="#homepage"
+                                                                                                        class="topic_list_link"
+                                                                                                        id="topic_list_link_font">#夫妻吵架最伤人的话是什么#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font10">10</span><a href="#homepage"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">Java,狗都不用</a>
+                </li>
+
+            </ul>
+        </div>
+        <!--下拉刷新-->
+        <div class="main_content">
+            <div class="recommand_chioce">
+                <p style="text-align: left;margin-left: 20px">热门分区</p>
+                <div v-for="r in hot_zones" class="plate_recommand">
+                    <a :href="/zone/ + r.zurl"><img class="plateimg" :src="r.ziconUrl"></a>
+                    <div class="plate_recommand_right_p">
+                        <p style="margin-block-start:0.5em;"><a :href="/zone/ + r.zurl"   class="none_underline_link" >{{ r.zname }}</a></p>
+                        <p>{{ r.zintroduction }}</p>
+                        <p>
+                            <span class="post_care_count_1">关注人数:{{ r.likeNumber }} &nbsp;</span>
+                            <span class="posts_count">&nbsp;帖子数:{{ r.postcount }}</span>
+                        </p>
+                    </div>
+                </div>
+
+
+                <!--            <div class="plate_recommand">-->
+                <!--                <a href="#"><img class="plateimg" src="../static/images/TomPiano.jpg"></a>-->
+                <!--                <div class="plate_recommand_right_p">-->
+                <!--                    <p style="margin-block-start:0.5em;"><a class="none_underline_link" href="#">Tomcat</a></p>-->
+                <!--                    <p>1231</p>-->
+                <!--                    <p>-->
+                <!--                        <span class="post_care_count_1">关注人数</span>-->
+                <!--                        <span class="posts_count">帖子数</span>-->
+                <!--                    </p>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--            <div class="plate_recommand">-->
+                <!--                <a href="#"><img class="plateimg" src="../static/images/TomPiano.jpg"></a>-->
+                <!--                <div class="plate_recommand_right_p">-->
+                <!--                    <p style="margin-block-start:0.5em;"><a class="none_underline_link" href="#">Tomcat</a></p>-->
+                <!--                    <p>1231</p>-->
+                <!--                    <p>-->
+                <!--                        <span class="post_care_count_1">关注人数</span>-->
+                <!--                        <span class="posts_count">帖子数</span>-->
+                <!--                    </p>-->
+                <!--                </div>-->
+                <!--            </div>-->
+            </div>
+            <div class="posts_contents">
+                <div class="flesh_tip"></div>
+                <div class="switch_box">
+                    <a id="button_hot" class="none_underline_link switch_button_style" onclick="ButtonCheck(this);getpostresources(1,0);">最热门</a>
+                    <a id="button_new" class="none_underline_link switch_button_style" onclick="ButtonCheck(this);getpostresources(2,0)">最近的</a>
+                </div>
+                <div v-if="isShow_post">
+                    <div class="post_block_outter" v-for="h in hot_posts">
+                        <div class="post_block">
+                            <div>
+                                <a><img :src="h.postZoneData.ziconUrl" class="zone_icon icon" alt="img"></a>
+                                <div class="Zone_data_warpper"><a :href="['/zone/'+h.postZoneData.zurl]"
+                                                                  class="user_link top_of_box margin_top10px">{{h.postZoneData.zname}}</a>
+                                    <p class="zone_hot_data">关注数{{ h.postZoneData.likeNumber }} 帖子数{{ h.postZoneData.postcount}}</p></div>
+                            </div>
+                            <a :href="['/post/'+h.pid]" class="post_tittle_link none_underline_link" style="margin-top: 20px">{{h.ptittle}}</a>
+                            <div v-html="h.firstFloor.content"></div>
+                            <span>
+                            <span class="last_visited_time">最后修改时间:{{h.plastVisitedTime}}</span>
+                                <!--                    <a>（分享）</a>-->
+                            <span class="page_hot_data">
+                            <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"
+                                 style="height: 100%"><a class="icon_link">{{ h.plikeCount }}</a>
+                            <img class="comment_link_icon" src="../static/images/page_icons/comment.png"
+                                 style="height: 100%"><a class="icon_link">{{h.floorCount}}</a>
+                            <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"
+                                 style="height: 100%"><a class="icon_link">{{ h.pdislikeCount }}</a>
+                            </span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="footer1">
+            copyright©2021 Loneybear All Right Reserved
+        </div>
+        <div class="mini_userdata_contatiner_transparent display_none" id="dynamic_user_data" onmouseover="showDynamicUserDataFrame()" onmouseout="hideDynamicUserDataFrame()">
+            <div class="mini_userdata_contatiner">
+               <div class="mini_userdata_icon_container">
+                   <a href="/userdata"><img class="icon_cirile mini_data_icon"  :src="user.iconUrl"></a>
+               </div>
+               <div class="mini_data_icon_profile_warpper">
+                   <div class="mini_userdata_divide_box_type1 mini_userdata_divide_box_top mini_userdata_divide_box_center" style="padding-bottom: 0">
+                       <a class="none_underline_link a_block_display" href="/userdata">{{user.nick}}</a>
+                       <a class="none_underline_link a_block_display" style="margin-bottom: 15px">Lv.{{user.level }}</a>
+                   </div>
+    <!--               <div class="mini_userdata_divide_box mini_userdata_divide_box_center" style="padding-top:0 "></div>-->
+                   <div class="mini_userdata_divide_box mini_userdata_divide_box_top"><a class="none_underline_link" href="/userdata">个人中心</a></div>
+                   <div class="mini_userdata_divide_box"><a class="none_underline_link" href="#">收藏主题</a></div>
+                   <div class="mini_userdata_divide_box"><a class="none_underline_link" href="#">浏览记录</a></div>
+                   <div class="mini_userdata_divide_box"><a class="none_underline_link" href="/logout">退出登录</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="mini_message_contatiner_transparent display_none" id="dynamic_message_data" onmouseover="showDynamicMessageFrame()" onmouseout="hideDynamicMessageFrame()">
+            <div class="mini_message_contatiner">
+                    <div class="mini_userdata_divide_box mini_userdata_divide_box_top"><a  class="none_underline_link cursor_pointer" href="/message">查看私信</a></div>
+                    <div class="mini_userdata_divide_box"><a class="none_underline_link cursor_pointer" href="/message">查看回复</a></div>
+                    <div class="mini_userdata_divide_box"><a class="none_underline_link cursor_pointer" href="/message">我的收藏</a></div>
+                    <div class="mini_userdata_divide_box"><a class="none_underline_link cursor_pointer" href="/message">我的通知</a></div>
+            </div>
+        </div>
+
+    </div>
+    <script src="../static/js/jquery-3.6.0.js"></script>
+    <script src="../static/js/jquery.serializejson.js"></script>
+    <script src="../static/js/vue.global.js"></script>
+    <script src="../static/js/axios.min.js"></script>
+
+    <script src="../static/js/Homepage.js"></script>
+    <script src="../static/swiper-master/package/swiper-bundle.min.js"></script>
+    <script src="../static/swiper-master/package/TweenMax.min.js"></script>
+    <script src="../static/swiper-master/package/swiper.animate1.0.3.min.js"></script>
+    <script>
+
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 1,
+            loop: true,
+            // effect:'fade',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                // renderBullet: function (index, className) {
+                //     return '<span class="' + className + '">' + (index + 1) + '</span>';
+                // },
+            },
+            autoplay: {
+                delay: 4000,
+                stopOnLastSlide: false,
+                disableOnInteraction: true,
+            },
+        });
+    </script>
+    <script>
+    </script>
+</body>
+
+</html>

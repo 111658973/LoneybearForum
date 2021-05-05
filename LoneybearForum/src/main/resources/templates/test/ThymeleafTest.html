@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf</title>
+</head>
+<body>
+    <h1 th:text="${msg}">123456789</h1>
+    <h1 th:text="${msg1}">123456789</h1>
+    <a href="https://www.baidu.com" th:href="${lnik}">baidu</a>
+
+<!--    跳转到/link-->
+    <a href="https://www.baidu.com" th:href="@{lnik}" >baidu</a>
+<form method="post" action="/test1">
+    <p><label th:text="${msg}+${msg1}" style="color: red"></label></p>
+    <p><input type="text" name = "username" id="input"></p>
+    <p><input type="password" name="password"></p>
+    <input type="submit" value="login" id="submit_button" name="sb" style="display: block">
+    <input type="button" onclick="alertError();" id="001" value="test">
+</form>
+
+</body>
+<script src="../static/js/vue.js"></script>
+<script src="../../static/js/LoginAjax.js"></script>
+
+</html>

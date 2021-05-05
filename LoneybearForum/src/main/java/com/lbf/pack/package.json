@@ -1,0 +1,37 @@
+{
+  "authorities": [
+    {
+      "authority": "2"
+    }
+  ],
+  "details": {
+    "remoteAddress": "0:0:0:0:0:0:0:1",
+    "sessionId": "DEF8029E46C92A41EBF45CA78EFDC1AE"
+  },
+  "authenticated": true,
+  "principal": {
+    "verifyCode": null,
+    "headers": null,
+    "authority": "2",
+    "nick": "root",
+    "email": "Binfeng.chai@gmail.com",
+    "username": "root",
+    "password": "root",
+    "createDate": "2021-01-01",
+    "lastVisitedTime": "2021-04-27 23:07:41",
+    "phoneNumber": "17308443899",
+    "uuid": "root_000",
+    "lastVisitedIp": "0:0:0:0:0:0:0:1",
+    "authorities": [
+      {
+        "authority": "2"
+      }
+    ],
+    "accountNonExpired": true,
+    "accountNonLocked": true,
+    "credentialsNonExpired": true,
+    "enabled": true
+  },
+  "credentials": null,
+  "name": "root"
+}

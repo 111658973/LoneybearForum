@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div><span style="background: yellow">asdfasdkj啊</span>电视剧阿莱克斯大家</span></div>
+    <div  id="Editor" style="margin-top: 3%;width: 60%;margin-left: 20%"></div>
+    <div style="position: fixed;left: 10%;top:30%">
+        <p><button onclick="getTEXT()">获取text</button></p>
+        <p><button onclick="getHTML()" >获取html</button></p>
+        <p><button onclick="getJSON()" >获取json</button></p>
+        <p><button onclick="upload1();" >上传json</button></p>
+
+    </div>
+
+        <div id="flushimg" style="margin-top: 100px">
+            <img alt="验证码" onclick="this.src='/defaultKaptcha?d=' + new Date()*1" src="/defaultKaptcha" />
+            <a>看不清？点击图片刷新一下</a>
+        </div>
+        <input type="text" name="tryCode" class="form-control" required placeholder="-----请输入验证码-----" />
+        <button onclick="test()">spasdasdasdasd</button>
+
+
+    <script src="../../static/js/wangEditor.min.js"></script>
+    <script src="../../static/js/jquery-3.6.0.js"></script>
+
+    <script>
+        const E = window.wangEditor;
+        const editor = new E("#Editor");
+        editor.config.height = 300;
+        editor.config.menus=[
+            'head',
+            'bold',
+            'fontSize',
+            'fontName',
+            'italic',
+            'quote',
+            'emoticon',
+            'image',
+            'undo',
+            'redo',
+        ]
+        // editor.config.uploadImgServer = '/'
+        editor.config.uploadImgShowBase64 = true;
+        editor.config.showLinkImg= false;
+
+        editor.create();
+    </script>
+    <script>
+       function getTEXT(){
+           console.log(editor.txt.text());
+       }
+       function getHTML(){
+           console.log(editor.txt.html());
+       }
+       function getJSON(){
+           console.log(editor.txt.getJSON());
+       }
+       function upload1(){
+           var formdata = new FormData();
+           formdata.append("html",editor.txt.html());
+           formdata.append("json",JSON.stringify(editor.txt.getJSON()));
+           formdata.append("text",editor.txt.text());
+
+           $.ajax({
+               cache: false,
+               contentType: false,
+               processData: false,
+               // contentType:"application/json;charset=utf-8",
+               type:"post",
+               url:"/cll",
+               data: formdata,
+               async:true,
+               success:function(res) {
+                   console.log(res)
+
+               },
+               error:function(res){
+                   console.log("error");
+               }
+           });
+       }
+       function test(){
+           var rawurl = "http://localhost:8080/userdata/阿苏妲己阿莱克斯";
+           var param = rawurl.slice(31,rawurl.length)
+           alert(param);
+       }
+    </script>
+</body>
+</html>

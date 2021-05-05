@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <ul>
+        <button id="1" onclick="f(this)">阿萨达的</button>
+        <li id="2">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</head>
+<body>
+
+
+<script>
+    function f(obj){
+        obj.innerText ="123";
+        alert($(obj).next("li").innerText);
+        // document.getElementById("2").innerText="123";
+    }
+</script>
+<script src="../../static/js/jquery-3.6.0.js"></script>
+
+</body>
+</html>

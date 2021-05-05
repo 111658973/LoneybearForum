@@ -1,0 +1,414 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header_fixed {
+    position: fixed;
+    top: 0;
+    height: 50px;
+    background: white;
+    border-bottom: #DDD solid 1px;
+    width: 100%;
+}
+
+.container {
+    width: 70%;
+    margin-left: 17%;
+    height: 2000px;
+    margin-top: 50px;
+
+}
+
+.container_message {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.flex_col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex_col_center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 49px;
+    background: aqua;
+}
+
+.message_nav_left {
+    height: 100%;
+    width: 10%;
+    position: fixed;
+    margin-top: 6%;
+}
+
+.message_right {
+    width: 70%;
+    /*background:salmon;*/
+    margin-left: 15%;
+}
+
+.message_hint_top {
+    margin-top: 6%;
+    border-radius: 5px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.5);
+    line-height: 50px;
+    font-size: 20px;
+    position: fixed;
+    width: 55%;
+    border: #DDD solid 1px;
+
+
+}
+
+.message_wrapper {
+    height: 65%;
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: 160px;
+    border: #DDD solid 1px;
+    border-radius: 5px;
+    position: fixed;
+    width: 55%;
+    overflow-y: scroll;
+
+}
+
+.message_wrapper_loading {
+    height: 65%;
+    background: #393e7e;
+    margin-top: 160px;
+    border: #DDD solid 1px;
+    border-radius: 5px;
+    position: fixed;
+    width: 55%;
+    /*overflow-y: scroll;*/
+}
+
+#message_wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+#private_nav::-webkit-scrollbar {
+    display: none;
+}
+
+
+.message_nav_left_hint {
+    height: 50px;
+    /*background: blue;*/
+    color: white;
+    text-align: center;
+    font-size: 19px;
+    line-height: 50px;
+    /*background: rgba(255,255,255,0.4);*/
+
+}
+
+.message_sidebar_list {
+    position: relative;
+    top: -5px;
+    margin-left: 10px;
+    border-radius: 5px;
+    height: 560px;
+
+
+}
+
+.message_sidebar_li {
+    height: 40px;
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    border: #DDD solid 1px;
+
+}
+
+.message_sidebar_link {
+    text-decoration: none;
+    font-size: 18px;
+    color: #555555;
+    cursor: pointer;
+}
+
+.message_sidebar_link:link {
+    text-decoration: none;
+    font-size: 18px;
+
+    cursor: pointer;
+
+}
+
+.message_sidebar_link:hover {
+    text-decoration: none;
+    font-size: 18px;
+    color: dodgerblue;
+    cursor: pointer;
+
+}
+
+.message_sidebar_link:visited {
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+
+}
+
+.message_sidebar_link:active {
+    text-decoration: none;
+    font-size: 18px;
+    opacity: 80%;
+    color: dodgerblue;
+    cursor: pointer;
+
+}
+
+.init {
+    color: #555555;
+}
+
+.checked {
+    color: dodgerblue;
+}
+
+.message_sidebar_link_checked {
+    text-decoration: none;
+    font-size: 18px;
+    color: dodgerblue;
+    cursor: pointer;
+
+}
+
+.hint_icon {
+    width: 20px;
+    height: 20px;
+
+}
+
+.message_nav_left_sidebar {
+    /*margin-top: 30px;*/
+    border-radius: 5px;
+}
+
+.margin_left_20px {
+    margin-left: 20px;
+}
+
+.header_fixed {
+    background: rgba(255, 255, 255, 1);
+}
+
+.margin_top_20px {
+    margin-top: 20px;
+}
+
+.margin_left_10px {
+    margin-left: 10px;
+}
+
+.margin_top_10px {
+    margin-top: 10px;
+}
+
+.message_right_box {
+    background: rgba(255, 255, 255, 1);
+    border: #DDD solid 1px;
+    border-radius: 5px;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    margin-bottom: 2%;
+    margin-top: 2%;
+    padding: 15px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.loading {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.message_tittle {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.tittle_datetime {
+    color: #909090;
+}
+
+.user_icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.user_col {
+    display: flex;
+    align-items: center;
+}
+
+.private_box {
+    display: flex;
+    /*align-items: stretch;*/
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.message_bubble {
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 5px;
+}
+
+.bubble_default {
+    background: white;
+}
+
+.bubble_green {
+    background: green;
+}
+
+.bubble_me_default {
+    background: dodgerblue;
+}
+
+.private_container {
+    height: 100%;
+    background: #EEE;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.private_nav {
+    height: 100%;
+    width: 30%;
+    background: white;
+    border-right: #DDD solid 1px;
+
+}
+
+.private_user_wrapper {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.private_user_wrapper:hover {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #DDD;
+}
+
+.message_sender {
+    display: flex;
+    margin-top: 5px;
+}
+
+.message_receiver {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+
+}
+
+.message_display {
+    height: 80%;
+
+}
+
+.w-e-text {
+    border: none;
+}
+
+.w-e-toolbar {
+    border: none;
+}
+
+.w-e-text-container {
+    border: none;
+}
+
+.btn_send {
+    padding: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: lightskyblue;
+    border: none;
+    border-radius: 3px;
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+
+.btn_send:hover {
+    padding: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: lightskyblue;
+    border-radius: 3px;
+    margin-right: 10px;
+    opacity: 80%;
+    cursor: pointer;
+    border: none;
+
+}
+
+.btn_send:active {
+    padding: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: lightskyblue;
+    border-radius: 3px;
+    margin-right: 10px;
+    opacity: 100%;
+    cursor: pointer;
+    border: none;
+
+}
+
+.message_block {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.message_username {
+    font-size: 16px;
+    color: #404040;
+}
+
+.new_hint {
+    bottom: 10.5%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    background: white;
+    position: fixed;
+    width: 55%;
+    border-top: #DDD solid 1px;
+}
+
+
+

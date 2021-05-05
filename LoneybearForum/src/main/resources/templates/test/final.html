@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/Pagescss.css">
+    <link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/plugins/Bootstrap-select v1.13.9/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/Pagescss.css">
+</head>
+<body>
+    <div id="Vuehome"> {{ username }}</div>
+    <div class="lab_fix_div_userdata margin_botoom_100"><label class="userdata_edit_label">修改头像</label></div>
+    <input id="f" type="file" accept="image/*" name="file"  style="display: none" onchange="PreViewImg()">
+    <img id="iii" class="edit_icon_img" src="../../static/images/background/bg4.png" onclick="upload_icon();">
+    <form id="files" enctype="multipart/form-data" >
+        <input type="file" id="file" multiple="" name="file" accept="images/*" onchange="Mutiimg()">
+        <input type="text" name="text">
+        <button onclick="clear1()">clear</button>
+
+        <div id="img">
+
+        </div>
+          <select id="select" >
+                <option value="bg1.png">bg1</option>
+                <option value="bg2.png">bg2</option>
+                <option value="bg3.png">bg3</option>
+                <option value="bg4.png">bg4</option>
+            </select>
+        <button onclick="get1()">下载文件</button>
+    </form>
+
+    <br><br><br><br><br><br><br><br>
+    <button class="btn btn-primary margin_right_10px" data-toggle="modal" data-target="#addBlackList">添加</button>
+
+    <div class="modal fade" id="addBlackList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="position: relative;top:20%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" style="color: black">
+                        处理用户
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="input-group">
+                            <span style="border-bottom-left-radius: 0;letter-spacing: 13px" class="input-group-addon" >用户</span>
+                            <input style="border-bottom-right-radius: 0" type="text" class="form-control" placeholder="用户名或id" aria-describedby="basic-addon1">
+                        </div>
+                        <div style="width: 100%;height: 100px;border:#ccc solid 1px;border-top: none"></div>
+                        <div class="input-group margin_top30px ">
+                            <span class="input-group-addon" id="basic-addon">处理操作</span>
+                            <select class="selectpicker form-control">
+                                <optgroup label="停权">
+                                    <option>封禁</option>
+                                    <option>禁言</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="input-group margin_top30px" >
+                            <span style="border-bottom-left-radius: 0" class="input-group-addon" >持续时间</span>
+                            <select class="selectpicker form-control">
+                                <optgroup label="时限">
+                                    <option>1小时</option>
+                                    <option>1天</option>
+                                    <option>3天</option>
+                                    <option>7天</option>
+                                    <option>30天</option>
+                                    <option>永久</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+
+
+                        <div class="input-group margin_top30px margin_botoom_80" >
+                            <span style="border-bottom-left-radius: 0" class="input-group-addon" >处理原因</span>
+                            <input style="border-bottom-right-radius: 0" type="text" class="form-control" placeholder="违规原因" aria-describedby="basic-addon1">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a class="none_underline_link" href="#">辱骂他人</a></li>
+                                    <li><a class="none_underline_link" href="#">发表不当言论</a></li>
+                                    <li><a class="none_underline_link" href="#">发表引战言论</a></li>
+                                    <li><a class="none_underline_link" href="#">传播违法资料</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a class="none_underline_link" href="#">其他违规</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</body>
+
+<script src="../../static/js/jquery-3.6.0.js"></script>
+<script src="../../static/js/jquery.serializejson.js"></script>
+<script src="../../static/js/vue.global.js"></script>
+<script src="../../static/js/axios.min.js"></script>
+<script src="../../static/js/VueTest.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table-locale-all.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/Bootstrap-select v1.13.9/bootstrap-select.min.js"></script>
+<script>
+    function get1(){
+        var options=$("#select option:selected").val();
+        $.ajax( {
+            url: '/download/'+options,//你的保存文件脚本的路径
+            type: 'POST',
+            // data:formData,
+            contentType: false, //不设置内容类型
+            processData: false, //不处理数据
+            cache:"false",
+            async:"true",
+            dataType:"text",
+            success: function (data) {
+                alert('上传成功');
+                console.log(data)
+                var a = document.createElement('a');
+                //需要下载的数据内容,我这里放的就是BLOB，如果你有下载链接就不需要了
+                var url = window.URL.createObjectURL(content);
+                var filename = 'XXX.zip';
+                a.href = url;
+                a.download = filename;
+                a.click();
+                window.URL.revokeObjectURL(url);
+
+            },
+            error: function () {
+                alert('上传失败');
+            }
+        })
+    }
+
+</script>
+</html>

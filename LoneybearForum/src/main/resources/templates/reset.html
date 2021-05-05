@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset</title>
+    <link rel="stylesheet" href="../static/css/Pagescss.css">
+</head>
+<body style="background: url(../static/images/background/bg2.png);background-size: cover;background-attachment: fixed;height: 100%">
+<div class="hd">
+    <a href="#logo_link" class="logo_link"><img class="logo" src="../static/images/page_icons/run.gif">LoneyBearForum</a>
+</div>
+<div class="hd_slogan">
+    <p  class="sign_up_slogan">嗨!</p>
+    <p  class="sign_up_subslogan">老朋友</p>
+</div>
+<div class="reset_content">
+    <div class="reset_form_warpper">
+        <div class="reset_warpper_up_part">
+            <p id="singn_up_form_tittle">重置密码</p>
+        </div>
+<!--        <div class="new_reset_warpper_down_part">-->
+<!--            <div class="margin_top50px">-->
+<!--                <form id="ResetForm">-->
+<!--                    <p><span id="tip2" class="reset_user_used_tip2 visibility_hidden">用户已存在，请尝试其他用户名</span></p>-->
+<!--                    <div class="lab_fix_div"><label class="text_label">新密码</label></div><input id="reset1" type="password" class="reset_input_text " placeholder="新密码" name="newpassword" onblur="checkIsEmpty()" onfocus="ClearTip2()">-->
+<!--                    <div class="lab_fix_div"><label class="text_label">再次输入</label></div><input type="password" id="reset2" class="reset_input_text margin_top10px" placeholder="新密码" name="newpassword2" onblur="checkIsEmpty()" onfocus="ClearTip2()">-->
+<!--                    <input id="submit2" type="button" class="reset_submit_button disabled" value="修改密码" onclick="ResetConfirmAjax()">-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+          <div class="sign_up_warpper_down_part" id="down">
+            <div class="reset_form_data">
+                <form class="reset_form" action="/signuping" method="post" enctype="multipart/form-data" id="form" name="form">
+                    <p class="wrong_password_tip">
+                        <span id="tip1" class="reset_user_used_tip visibility_hidden" ></span>
+                    </p>
+                    <div class="lab_fix_div"><label class="text_label">用户名</label></div><input type="text" id="username" class="reset_input_text margin_botoom_30" placeholder="账号" name="username" required="required" onblur="CheckFormIfEmpty();" onfocus="ClearTip()">
+                    <div class="lab_fix_div"><label class="text_label">验证方式</label></div>
+                    <select class="verify_method_select" name="verify_type" onchange="ChangeVerifyMethod()" id="select">
+                        <option class="option_chioce"  value="email">绑定邮箱验证</option>
+                        <option class="option_chioce" value="phone">绑定短信验证</option>
+                    </select>
+                    <div class="tel_verify_box display_none" id="phone_verify_warpper">
+                        <div class="lab_fix_div"><label class="text_label">手机号</label></div><input disabled="disabled" type="tel" class="reset_input_text" placeholder="手机" name="phoneNumber" value="disabled"><br>
+                        <div class="lab_fix_div margin_top35px"><label class="text_label">验证码</label></div><input disabled="disabled" type="text" class="input_text_type_verifycode reset_input_text" placeholder="验证码" name="verifycode_phone" required="required" value="disabled">
+                        <input type="button" class="get_verifi_code_button disabled" value="获取验证码" onclick=""><br>
+                    </div>
+                    <div class="mail_verify_box" id="mail_verify_warpper">
+                        <div class="lab_fix_div"><label class="text_label" style="letter-spacing: 3.5px">邮箱</label></div><input type="email" class="reset_input_text " placeholder="邮箱" name="email" id="email" onblur="CheckFormIfEmpty();" onfocus="ClearTip()">
+                        <div class="lab_fix_div margin_top35px"><label class="text_label">验证码</label></div><input type="text" class="input_text_type_verifycode reset_input_text" placeholder="验证码" name="verifycode_email" required="required" onblur="CheckFormIfEmpty();" onfocus="ClearTip()">
+                        <input type="button" class="get_verifi_code_button" id="reget2" value="获取验证码"  onclick="show_verify_container();getEmailVerifycodeAjax()"><br>
+
+                    </div>
+
+                </form>
+            </div>
+            <input id="submit1" type="button" class="reset_submit_button disabled" value="验证" onclick="ResetVerifyAjax()">
+            <div class="get_email_verifycode_container1 display_none" id="verify_container" >
+                  <img class="cancel_button"  src="../static/images/page_icons/cancel2.png" onclick="hide_verify_container()">
+                  <div class="get_email_verifycode_warpper">
+                      <p class="singn_up_form_tittle">邮箱验证</p>
+                      <div class="get_email_verifycode_warpper_content">
+                          <p>已经给<a id="user_email"></a>发送验证邮件</p>
+                          <p>请去邮箱查看，验证码持续5分钟</p>
+                          <p id="tip"><span id="clock">10</span>秒后可再次发送</p>
+                          <button id="resend" class="get_email_verifycode_submit" onclick="timeClock()">再次发送</button>
+
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+    </div>
+    <div class="login_footer"></div>
+</div>
+
+
+<script src="../static/js/jquery-3.6.0.js"></script>
+<script src="../static/js/jquery.serializejson.js"></script>
+<script src="../static/js/vue.global.js"></script>
+<script src="../static/js/axios.min.js"></script>
+<script src="../static/js/ResetAjax.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Userdata</title>
+    <link rel="stylesheet" href="../static/css/Pagescss.css">
+
+</head>
+<body style="background: url(../static/images/background/bg9.png);background-size: cover;background-attachment: fixed;text-align: center">
+<div id="Vue" v-if="isShow">
+    <div class="header_thin">
+            <span>
+                <a class="none_underline_link" href="/homepage">主页</a>
+                <a class="none_underline_link margin_left_20px" href="#undefine">消息</a>
+                <a class="none_underline_link margin_left_20px" href="/logout">登出</a>
+            </span>
+    </div>
+    <div class="data_main_container">
+        <div class="edit_buttom"><img class="userdata_edit_button"
+                                      src="../static/images/page_icons/setting_icon_white2.png"
+                                      onclick="showEditContainer();"></div>
+        <span>
+                <div class="userdata_part_box2">
+                <div class="userdata_part_box">
+                    <div class="userdata_upwarpper">
+                        <div class="userdata_icon_box"><img class="userdata_icon" :src="user_data.iconUrl"></div>
+                        <div class="userdata_data_warpper">
+                            <p>{{ user_data.nick }}  <img :src="sex_icon_url" class="sex_icon"></img></p>
+                            <p>Lv.{{ user_data.level }}  {{ user_data.level_name }}</p>
+                            <P>注册时间:{{ user_data.createDate }}</P>
+                            <p>自我介绍：&nbsp{{ user_data.uintroduction }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                <div class="userdata_part_box3"><img :src="user_data.displayImgUrl" style="width: 100%"></div>
+            </span>
+        <div class="userdata_stage_warpper">
+            <div class="userdata_stage_switch">
+                <div id="s1" class="userdata_stage_switche_button" onclick="show_switch_button(1);switchUserda(1,0)" on>
+                    <a class="userdata_stage_switch_link">我的帖子</a></div>
+                <div id="s2" class="userdata_stage_switche_button" onclick="show_switch_button(2);switchUserda(2,0)"><a
+                        class="userdata_stage_switch_link">我的收藏</a></div>
+                <div id="s3" class="userdata_stage_switche_button" onclick="show_switch_button(3);switchUserda(3,0)"><a
+                        class="userdata_stage_switch_link">关注分区动态</a></div>
+                <div id="s4" class="userdata_stage_switche_button" onclick="show_switch_button(4);switchUserda(4,0)"><a
+                        class="userdata_stage_switch_link">浏览记录</a></div>
+            </div>
+        </div>
+        <div id="switchbox1" v-show="show_switch1">
+            <div class="userdata_part_box1" v-for="post in user_posts">
+                <div class="userdata_post_up">
+                    <div><img class="mini_userdata_zone_icon" :src="post.postZoneData.ziconUrl"></div>
+                    <div class="flex_col">
+                        <a class="userdata_zone_name none_underline_link" :href="['/zone/'+post.postZoneData.zurl]">{{post.postZoneData.zname}}分区</a>
+                        <label style="font-size: 12px">帖子数{{post.floorCount}} 关注数{{post.plikeCount}}</label>
+                    </div>
+
+                </div>
+                <div class="userdata_zone_tittle_wrapper"><a class="userdata_zone_tittle none_underline_link"
+                                                             :href="['/post/'+post.pid]">{{post.ptittle}}</a></div>
+                <div class="userdata_post_content" v-html="post.firstFloor.content"></div>
+                <div class="userdata_post_bottom">
+                    <span class="userdata_post_hot_data">
+                        <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"><a
+                            class="icon_link">{{post.plikeCount}}</a>
+                        <img class="comment_link_icon" src="../static/images/page_icons/comment.png"><a
+                            class="icon_link">{{post.floorCount}}</a>
+                        <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"><a
+                            class="icon_link">{{post.pdislikeCount}}</a>
+                        <span class="last_visited_time">最后修改时间:{{post.plastVisitedTime}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="switchbox2" v-if="show_switch2">
+            <div class="userdata_part_box1" v-for="s in switchData">
+                <div class="userdata_post_up">
+                    <div><img class="mini_userdata_zone_icon" :src="s.postZoneData.ziconUrl"></div>
+                    <div class="flex_col">
+                        <a class="userdata_zone_name none_underline_link" :href="['/zone/'+s.postZoneData.zurl]">{{s.postZoneData.zname}}分区</a>
+                        <label style="font-size: 12px">帖子数{{s.floorCount}} 关注数{{s.plikeCount}}</label>
+                    </div>
+
+                </div>
+                <div class="userdata_zone_tittle_wrapper"><a class="userdata_zone_tittle none_underline_link"
+                                                             :href="['/post/'+s.pid]">{{s.ptittle}}</a></div>
+                <div class="userdata_post_content" v-html="s.firstFloor.content"></div>
+                <div class="userdata_post_bottom">
+                    <span class="userdata_post_hot_data">
+                        <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"><a
+                            class="icon_link">{{s.plikeCount}}</a>
+                        <img class="comment_link_icon" src="../static/images/page_icons/comment.png"><a
+                            class="icon_link">{{s.floorCount}}</a>
+                        <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"><a
+                            class="icon_link">{{s.pdislikeCount}}</a>
+                        <span class="last_visited_time">最后修改时间:{{s.plastVisitedTime}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="switchbox3" v-if="show_switch3" v-for="zone in switchData">
+            <div class="userdata_part_box1" v-for="post in zone.zonepost">
+                <div class="userdata_post_up">
+                    <div><img class="mini_userdata_zone_icon" :src="post.postZoneData.ziconUrl"></div>
+                    <div class="flex_col">
+                        <a class="userdata_zone_name none_underline_link" :href="['/zone/'+post.postZoneData.zurl]">{{post.postZoneData.zname}}分区</a>
+                        <label style="font-size: 12px">帖子数{{post.floorCount}} 关注数{{post.plikeCount}}</label>
+                    </div>
+
+                </div>
+                <div class="userdata_zone_tittle_wrapper"><a class="userdata_zone_tittle none_underline_link"
+                                                             :href="['/post/'+post.pid]">{{post.ptittle}}</a></div>
+                <div class="userdata_post_content" v-html="post.firstFloor.content"></div>
+                <div class="userdata_post_bottom">
+                    <span class="userdata_post_hot_data">
+                        <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"><a
+                            class="icon_link">{{post.plikeCount}}</a>
+                        <img class="comment_link_icon" src="../static/images/page_icons/comment.png"><a
+                            class="icon_link">{{post.floorCount}}</a>
+                        <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"><a
+                            class="icon_link">{{post.pdislikeCount}}</a>
+                        <span class="last_visited_time">最后修改时间:{{post.plastVisitedTime}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="switchbox4" v-if="show_switch4">
+            <div class="userdata_part_box1" v-for="post in switchData">
+                <div class="userdata_post_up">
+                    <div><img class="mini_userdata_zone_icon" :src="post.postZoneData.ziconUrl"></div>
+                    <div class="flex_col">
+                        <a class="userdata_zone_name none_underline_link" :href="['/zone/'+post.postZoneData.zurl]">{{post.postZoneData.zname}}分区</a>
+                        <label style="font-size: 12px">帖子数{{post.floorCount}} 关注数{{post.plikeCount}}</label>
+                    </div>
+
+                </div>
+                <div class="userdata_zone_tittle_wrapper"><a class="userdata_zone_tittle none_underline_link"
+                                                             :href="['/post/'+post.pid]">{{post.ptittle}}</a></div>
+                <div class="userdata_post_content" v-html="post.firstFloor.content"></div>
+                <div class="userdata_post_bottom">
+                    <span class="userdata_post_hot_data">
+                        <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"><a
+                            class="icon_link">{{post.plikeCount}}</a>
+                        <img class="comment_link_icon" src="../static/images/page_icons/comment.png"><a
+                            class="icon_link">{{post.floorCount}}</a>
+                        <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"><a
+                            class="icon_link">{{post.pdislikeCount}}</a>
+                        <span class="last_visited_time">最后修改时间:{{post.plastVisitedTime}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer1">copyright©2021 Loneybear All Right Reserved</div>
+    <div class="edit_userdata_container display_none" id="edit_container" v-if="isEdit">
+        <img class="cancel_button" src="../static/images/page_icons/cancel2.png" onclick="hideEditContainer()">
+        <div class="edit_input_warpper">
+            <form name="form1" id="form1" enctype="multipart/form-data">
+                <div class="lab_fix_div_userdata margin_botoom_100"><label class="userdata_edit_label">修改头像</label>
+                </div>
+                <input type="file" accept="image/*" name="file" id="f" style="display: none" onchange="PreViewImg()">
+                <img id="img" name="icon" class="edit_icon_img" :src="user_data.iconUrl" onclick="upload_icon();">
+                <p>
+                <div class="lab_fix_div_userdata "><label class="userdata_edit_label">修改展示框</label></div>
+                <input type="file" accept="image/*" name="display" id="upload_display_img">
+                </p>
+                <p>
+                <div class="lab_fix_div_userdata"><label class="userdata_edit_label">性别</label></div>
+                <label><input id="rm" name="radio" class="" type="radio" value="男" v-model="sex"
+                              onclick="switchRadio(1);">男</label>
+                <label><input id="rf" name="radio" class="" type="radio" value="女" v-model="sex"
+                              onclick="switchRadio(2);">女</label>
+                </p>
+                <p>
+                <div class="lab_fix_div_userdata "><label class="userdata_edit_label">昵称</label></div>
+                <input id="nick" class="userdata_edit_input_long" type="text" placeholder="昵称" name="username"
+                       :value="user_data.nick"></p>
+                <p>
+                <div class="lab_fix_div_userdata"><label class="userdata_edit_label">手机号码</label></div>
+                <input id="phone" class="userdata_edit_input_long" readonly="readonly" type="text" placeholder="手机号码"
+                       name="phoneNumber" :value="user_data.phoneNumber"></p>
+                <p>
+                <div class="lab_fix_div_userdata"><label class="userdata_edit_label">邮箱</label></div>
+                <input id="mail" class="userdata_edit_input_long" readonly="readonly" type="text" placeholder="邮箱"
+                       name="mail" :value="user_data.email"></p>
+                <p>
+                <div class="lab_fix_div_userdata"><label class="userdata_edit_label">个人介绍</label></div>
+                <textarea id="introduction" class="userdata_edit_input_textarea" type="text" name="introduction"
+                          placeholder="个人简介">{{ user_data.uintroduction }}</textarea></p>
+            </form>
+            <button class="userdata_edit_container_submit" onclick="UpdateAjax();">确认修改</button>
+
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.js"></script>
+<script src="../static/js/jquery.serializejson.js"></script>
+<script src="../static/js/vue.global.js"></script>
+<script src="../static/js/axios.min.js"></script>
+<script src="../static/js/UserData.js"></script>
+
+</body>
+</html>

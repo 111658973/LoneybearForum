@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理分区资料头像之类的查看禁言和黑名单</title>
+    <link rel="stylesheet" href="../static/css/Pagescss.css">
+
+</head>
+<body style="background: #ecf5ff ;background: url(../static/images/background/bg8.png);background-size: cover;background-attachment: fixed">
+    <div id="Vue" v-if="isShow">
+        <div class="top_bar" >
+            <div v-show="logined">
+                <a class="top_bar_font" href="#homapage1" onmouseover="showDynamicUserDataFrame();" >用户</a>
+                <a class="top_bar_font" href="#消息" onmouseover="showDynamicMessageFrame();">消息</a>
+            </div>
+            <div v-show="!logined" style="text-align: right">
+                <label>请先登陆</label><a href="/login">登陆</a>
+            </div>
+        </div>
+        <div class="zone_search" >
+            <div class="zone_search_form">
+                <a href="/homepage" class="logo_link_homepage" id="logo_link"><img class="logo" src="../static/images/page_icons/run.gif">LBForum</a>
+                <input class="zone_searchInput" id="zone_search" type="text" name="main_search" placeholder="搜索内容">
+                <input class="search_button" type="submit" name="searchButton" value="搜索" onclick="ToSearch()">
+            </div>
+        </div>
+        <div class="zonedata_maincontainer">
+            <div class="zone_up_warpper">
+                <div class="zone_icon_box" >
+                    <a  class="href_enable cursor_pointer"><img class="zone_icon_img" :src="zone_data.ziconUrl" onclick="ajaxvisit_manage()"></a>
+                </div>
+                <div class="zone_up_text_warpper">
+                    <div style="line-height: 60px">
+                        <a onclick="ajaxvisit_manage();" class="href_enable none_underline_link " >{{ zone_data.zname }}分区</a>
+                        <label style="margin-left: 20px">关注人数{{ zone_data.likeNumber}}</label>
+                        <label style="margin-left: 20px">帖子{{ zone_data.postcount }}</label>
+                        <button id="like_button" class="like_button" style="margin-left: 20px" onclick="follow();floowButtonToggle(this)">+关注</button>
+                    </div><br>
+                    <div style="">{{ zone_data.zintroduction }}</div>
+                </div>
+            </div>
+            <div class="zone_posts_container">
+
+                <div id="relesh_hint" v-show="show_refleshhit" class="zone_reflesh_warpper"><div style="position: relative;left: -13%">有新帖子<a href="#">刷新</a></div></div>
+                <div class="zone_switch_box" >
+                    <div id="switch1" class="zone_switch_button_box_checked" onclick="switchButton(1);showsortpost(1,0)"><a  class="zone_switch_button none_underline_link"  >最热门</a></div>
+                    <div id="switch2" class="zone_switch_button_box" onclick="switchButton(2);showsortpost(2,0)"><a  class="zone_switch_button none_underline_link"  >最近的</a></div>
+                    <div id="switch3" class="zone_switch_button_box" onclick="switchButton(3);getGoodPost();"><a  class="zone_switch_button none_underline_link"  >精品区</a></div>
+                </div>
+                <div id="zone_post_wrapper" class="zone_posts_contents" v-if="isShow_post">
+<!--                    帖子从下面开始-->
+                    <div class="zone_post_warpper" v-for="post in posts_data">
+                        <div class="zone_post_up_warpper">
+                            <div class="zone_post_user_icon_box"><a :href="['/userdata/'+post.authorData.uid]" class="cursor_pointer"><img class="zone_post_user_icon_img" :src="post.authorData.iconUrl"></a></div>
+                            <div class="zone_post_user_data_box">
+                                <a :href="['/userdata/'+post.authorData.uid]" class="zone_post_user_data_name none_underline_link">{{post.authorData.nick}}</a>
+                            </div>
+                        </div>
+                        <div class="zone_post_text_warpper margin_botoom_10px">
+                            <a class="zone_post_content_tittle none_underline_link " :href="['/post/'+post.pid]">{{ post.ptittle}}</a>
+                            <div class="margin_top10px" v-html="post.firstFloor.content"></div>
+                        </div>
+                        <div class="zone_post_bottom_warpper margin_top30px">
+                            <span class="last_visited_time ">最后修改时间:{{post.plastVisitedTime}}</span>
+                            <span style="margin-left: 48%">
+                                <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"
+                                     style="height: 100%"><a class="icon_link">{{post.plikeCount}}</a>
+                                <img class="comment_link_icon" src="../static/images/page_icons/comment.png"
+                                     style="height: 100%"><a class="icon_link">{{post.floorCount}}</a>
+                                <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"
+                                     style="height: 100%"><a class="icon_link">{{post.pdislikeCount}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="zone_posts_contents" v-if="isShow_good">
+                    <!--                    精品贴帖子从下面开始-->
+                    <div class="zone_post_warpper" v-for="post in good_data">
+                        <div class="zone_post_up_warpper">
+                            <div class="zone_post_user_icon_box"><a :href="['/userdata/'+post.authorData.uid]" class="cursor_pointer"><img class="zone_post_user_icon_img" :src="post.authorData.iconUrl"></div>
+                            <div class="zone_post_user_data_box">
+                                <a :href="['/userdata/'+post.authorData.uid]" class="zone_post_user_data_name none_underline_link">{{post.authorData.nick}}</a>
+                            </div>
+                        </div>
+                        <div class="zone_post_text_warpper margin_botoom_10px">
+                            <img src="../static/images/page_icons/hot-3.png" class="icon_sm"><a class="zone_post_content_tittle none_underline_link " :href="['/post/'+post.pid]">{{ post.ptittle}}</a>
+                            <div class="margin_top10px" v-html="post.firstFloor.content"></div>
+                        </div>
+                        <div class="zone_post_bottom_warpper margin_top30px">
+                            <span class="last_visited_time ">最后修改时间:{{post.plastVisitedTime}}</span>
+                            <span style="margin-left: 48%">
+                                <img class="thumb_up_link_icon" src="../static/images/page_icons/appreciate.png"
+                                     style="height: 100%"><a class="icon_link">{{post.plikeCount}}</a>
+                                <img class="comment_link_icon" src="../static/images/page_icons/comment.png"
+                                     style="height: 100%"><a class="icon_link">{{post.floorCount}}</a>
+                                <img class="thumb_down_link_icon" src="../static/images/page_icons/oppose_light.png"
+                                     style="height: 100%"><a class="icon_link">{{post.pdislikeCount}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="create_new_post_container_zone">
+                    <div class="create_new_post_input_warpper">
+                        <label class="zone_create_post_tittle">发帖</label>
+                        <div class="zone_post_creatd_post_input_field_warpper">
+                            <input type="text" id="new_post_tittle" class="zone_post_create_input_text" placeholder="请填写标题" name="tittle_input" onkeyup="checkEditorIsEmpty()">
+<!--                            <label>内容</label>-->
+<!--                            <input id="file" multiple="" type="file" class="new_post_images" accept="images/*" style="display: none" onclick="MutiImg()">-->
+                            <div id="Editor" >
+
+                            </div>
+                        </div>
+                        <div class="zone_post_create_bottom_warpper" >
+<!--                            <button class="zone_post_creat_ubmit_button"  onclick="click_input_file()">图片</button>-->
+                            <button id="b_create_post" class="zone_post_creat_ubmit_button disabled" onclick="create_new_post();">发帖</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="topic_list_warpper">
+            <div class="topic_tittle_box">
+                <span class="topic_tittle" id="topic_tittle">热门Top10</span>
+                <a href="topic_page" class="topic_tittle_link">查看榜单</a>
+            </div>
+            <ul class="topic_list_ul">
+                <li class="topic_li"><span class="topic_list_image_1" id="topic_li_font1">1</span><a style="color: red" href="https://s.weibo.com/weibo?q=%23不结婚老了真的会很惨吗%23"
+                                                                                                     class="topic_list_link"
+                                                                                                     id="topic_list_link_font">#不结婚老了真的会很惨吗#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_2" id="topic_li_font2">2</span><a style="color: orange" href="https://s.weibo.com/weibo?q=%23天价片酬是否影响学生的职业观%23"
+                                                                                                     class="topic_list_link"
+                                                                                                     id="topic_list_link_font">#天价片酬是否影响学生的职业观#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_3" id="topic_li_font3">3</span><a style="color: yellowgreen" href="https://s.weibo.com/weibo?q=%23被动式伏弟魔的经历%23"
+                                                                                                     class="topic_list_link"
+                                                                                                     id="topic_list_link_font">#被动式伏弟魔的经历#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font4">4</span><a href="https://s.weibo.com/weibo?q=%23中国空间站有多硬核%23"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">#中国空间站有多硬核#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font5">5</span><a href="https://s.weibo.com/weibo?q=%23如何打破男尊女卑传宗接代等落后观念%23"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">#如何打破男尊女卑传宗接代等落后观念#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font6">6</span><a href="https://s.weibo.com/weibo?q=%23你能接受孩子将来不如自己吗%23"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">#你能接受孩子将来不如自己吗#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font7">7</span><a href="https://s.weibo.com/weibo?q=%23天价阴阳合同为何屡禁不止%23"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">#天价阴阳合同为何屡禁不止#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font8">8</span><a href="https://s.weibo.com/weibo?q=%23特斯拉与中国市场的蜜月期结束了吗%23"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">#特斯拉与中国市场的蜜月期结束了吗#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font9">9</span><a href="#homepage"
+                                                                                                         class="topic_list_link"
+                                                                                                         id="topic_list_link_font">#夫妻吵架最伤人的话是什么#</a>
+                </li>
+                <li class="topic_li"><span class="topic_list_image_nomal" id="topic_li_font10">10</span><a href="#homepage"
+                                                                                                           class="topic_list_link"
+                                                                                                           id="topic_list_link_font">Java,狗都不用</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="footer1">
+            copyright©2021 Loneybear All Right Reserved
+        </div>
+
+        <div v-if="logined" class="mini_userdata_contatiner_transparent display_none" id="dynamic_user_data" onmouseover="showDynamicUserDataFrame()" onmouseout="hideDynamicUserDataFrame()">
+            <div class="mini_userdata_contatiner">
+                <div class="mini_userdata_icon_container">
+                    <a href="/userdata"><img class="icon_cirile mini_data_icon" :src="user_data.iconUrl"></a>
+                </div>
+                <div class="mini_data_icon_profile_warpper">
+                    <div class="mini_userdata_divide_box_type1 mini_userdata_divide_box_top mini_userdata_divide_box_center" style="padding-bottom: 0">
+                        <a class="none_underline_link a_block_display" href="/userdata">{{user_data.nick}}</a>
+                        <a class="none_underline_link a_block_display" style="margin-bottom: 15px">Lv.{{ user_data.level }}</a>
+                    </div>
+                    <!--               <div class="mini_userdata_divide_box mini_userdata_divide_box_center" style="padding-top:0 "></div>-->
+                    <div class="mini_userdata_divide_box mini_userdata_divide_box_top"><a class="none_underline_link" href="/userdata">个人中心</a></div>
+                    <div class="mini_userdata_divide_box"><a class="none_underline_link" href="#">收藏主题</a></div>
+                    <div class="mini_userdata_divide_box"><a class="none_underline_link" href="#">浏览记录</a></div>
+                    <div class="mini_userdata_divide_box"><a class="none_underline_link" href="/logout">退出登录</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="mini_message_contatiner_transparent display_none" id="dynamic_message_data" onmouseover="showDynamicMessageFrame()" onmouseout="hideDynamicMessageFrame()">
+            <div class="mini_message_contatiner">
+                <div class="mini_userdata_divide_box mini_userdata_divide_box_top point"><a class="none_underline_link cursor_pointer" href="/message">查看私信</a></div>
+                <div class="mini_userdata_divide_box"><a class="none_underline_link cursor_pointer" href="/message">查看回复</a></div>
+                <div class="mini_userdata_divide_box"><a class="none_underline_link cursor_pointer" href="/message">我的收藏</a></div>
+                <div class="mini_userdata_divide_box"><a class="none_underline_link cursor_pointer" href="/message">我的通知</a></div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/jquery-3.6.0.js"></script>
+    <script src="../static/js/jquery.serializejson.js"></script>
+    <script src="../static/js/vue.global.js"></script>
+    <script src="../static/js/axios.min.js"></script>
+    <script src="../static/js/wangEditor.min.js"></script>
+    <script src="../static/js/Zone.js"></script>
+    <script src="../static/js/Common.js"></script>
+
+    <script>
+        const E = window.wangEditor;
+        const editor = new E("#Editor");
+        editor.config.height = 300;
+        editor.config.menus=[
+            'head',
+            'bold',
+            'fontSize',
+            'fontName',
+            'italic',
+            'indent',
+            'quote',
+            'emoticon',
+            'image',
+            'undo',
+            'redo',
+        ]
+        editor.config.uploadImgShowBase64 = true;
+        editor.config.showLinkImg= false;
+
+        editor.config.onchange = function (){
+            var tittle = $("#new_post_tittle").val();
+            var text = editor.txt.text();
+            if (text == "" || tittle == "") {
+                $("#b_create_post").addClass("disabled");
+            } else {
+                $("#b_create_post").removeClass("disabled");
+            }
+        }
+        editor.create();
+    </script>
+</body>
+</html>

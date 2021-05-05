@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消息</title>
+    <link rel="stylesheet" href="../static/css/message.css">
+</head>
+<body style="background: url(../static/images/message/bg10.png);background-size: cover;background-attachment: fixed;height: 100%">
+<div id="Vue">
+<!--    <div class="header_fixed">hearder</div>-->
+    <div class="container container_message">
+        <div class="message_nav_left">
+            <div class="message_nav_left_hint">
+                <img class="hint_icon" src="../static/images/message/plane_white.png">
+                <label class="hint_content">消息中心</label>
+            </div>
+            <div class="message_nav_left_sidebar">
+                <div class="message_sidebar_list">
+                    <div id="s0" class="message_sidebar_li" onclick="switchNav(this)">
+                        <a class="message_sidebar_link checked" href="#reply" title="回复我的">回复我的</a>
+                    </div>
+                    <div id="s1" class="message_sidebar_li" onclick="switchNav(this)">
+                        <a class="message_sidebar_link init" href="#at" title="@我的">@我的</a>
+                    </div>
+                    <div id="s2" class="message_sidebar_li" onclick="switchNav(this)">
+                        <a class="message_sidebar_link init" href="#like" title="收到的赞">收到的赞</a>
+                    </div>
+                    <div id="s3" class="message_sidebar_li" onclick="switchNav(this)">
+                        <a class="message_sidebar_link init" href="#system" title="系统通知">系统通知</a>
+                    </div>
+                    <div id="s4" class="message_sidebar_li" onclick="switchNav(this)">
+                        <a class="message_sidebar_link init" href="#private" title="我的私信">我的私信</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="message_right">
+            <div class="message_hint_top">
+                <label class="margin_left_20px" v-model="hint">{{hint}}</label>
+            </div>
+            <div id="message_wrapper" class="message_wrapper_loading" >
+                <div v-if="loading" style="z-index: 10000" id="loading">
+                    <img src="../static/images/message/loading2.gif" class="loading">
+                </div>
+
+                <div v-if="show_switch[0]" id="reply">
+                    <div class="message_right_box">
+                        <div style="display: flex">
+                            <div><img src="../static/images/message/loading3.gif" class="user_icon"></div>
+                            <div>
+                                <div>
+                                    <a class="message_tittle margin_left_10px">用户2021050123123</a>
+                                    <a class="margin_left_10px">回复了你</a>
+                                </div>
+                                <div><a class="tittle_datetime margin_left_10px">2020-1-1 20:00:00</a></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>回复一下看看</div>
+                            <div></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div v-if="show_switch[1]" id="at">
+                    <div class="message_right_box">
+                        <div style="display: flex">
+                            <div>
+                                <img src="../static/images/message/loading3.gif" class="user_icon">
+                            </div>
+                            <div>
+                                <div>
+                                    <a class="message_tittle margin_left_10px">username</a>
+                                    <a class="margin_left_10px">在xxx中@了你</a>
+
+                                </div>
+                                <div><a class="tittle_datetime margin_left_10px">2020-1-1 20:00:00</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="show_switch[2]" id="like">
+                    <div class="message_right_box">
+                        <div style="display: flex">
+                            <div><img src="../static/images/message/loading3.gif" class="user_icon"></div>
+                            <div>
+                                <div>
+                                    <a class="message_tittle margin_left_10px">username</a>
+                                    <a class="margin_left_10px">在xxxxx帖子中给你点了个赞</a>
+                                </div>
+                                <div><a class="tittle_datetime margin_left_10px">2020-1-1 20:00:00</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div v-if="show_switch[3]" id="system" style="overflow-y: scroll">
+                    <div class="message_right_box" v-for="m in message_notify">
+                        <div>
+                            <label class="message_tittle">{{m.tittle}}</label>
+                            <a class="margin_left_20px  tittle_datetime">{{m.time}}</a>
+                        </div>
+                        <div class="margin_left_10px margin_top_10px">
+                            {{m.content}}
+                        </div>
+                        <div><a class="link"></a></div>
+                    </div>
+                    <div class="new_hint" >有新消息</div>
+                </div>
+
+                <div v-show="show_switch[4]" id="private" style="height: 100%;">
+                    <div class="private_box">
+                        <div id="private_nav" class="private_nav" style="overflow-y: scroll">
+                            <div class="private_user_wrapper">
+                                <img src="../static/images/message/loading2.gif" class="user_icon">
+                                <div style="overflow:hidden;margin-right: 0;max-height:22px">
+                                    <a class="margin_left_10px" >用户202105051231231</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div  class="private_container" style="overflow-y: scroll">
+                            <div class="message_display">
+                                <div class="message_block">
+                                    <div style="text-align: center;margin: 15px">
+                                        <a>2020年4月21日 11:21</a>
+                                    </div>
+                                    <div class="message_sender">
+                                        <div><img src="../static/images/message/loading3.gif" class="user_icon"></div>
+                                        <div>
+                                            <div>
+                                                <a class="message_username margin_left_10px">用户2021050123123</a>
+                                            </div>
+                                            <div>
+                                                <div class="message_bubble bubble_default">
+                                                    内容正文内容正文内容正文内容正文内容正文内容正文
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="message_sender">
+                                        <div><img src="../static/images/message/loading3.gif" class="user_icon"></div>
+                                        <div>
+                                            <div>
+                                                <a class="message_username margin_left_10px">用户2021050123123</a>
+                                            </div>
+                                            <div>
+                                                <div class="message_bubble bubble_default">
+                                                    内容正文内容正文内容正文内容正文内容正文内容正文
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="message_sender">
+                                        <div><img src="../static/images/message/loading3.gif" class="user_icon"></div>
+                                        <div>
+                                            <div>
+                                                <a class="message_username margin_left_10px">用户2021050123123</a>
+                                            </div>
+                                            <div>
+                                                <div class="message_bubble bubble_default">
+                                                    内容正文内容正文内容正文内容正文内容正文内容正文
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="message_block">
+                                    <div style="text-align: center;margin: 15px">
+                                        <a>2020年4月21日 11:22</a>
+                                    </div>
+                                    <div class="message_receiver">
+                                        <div><img src="../static/images/users_icons/angry00.png" class="user_icon"></div>
+                                        <div>
+                                            <div>
+                                                <a class="message_username margin_left_10px">Loneybear</a>
+                                            </div>
+                                            <div>
+                                                <div class="message_bubble bubble_me_default">
+                                                    发帖测试1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="message_receiver">
+                                        <div><img src="../static/images/users_icons/angry00.png" class="user_icon"></div>
+                                        <div>
+                                            <div>
+                                                <a class="message_username margin_left_10px">Loneybear</a>
+                                            </div>
+                                            <div>
+                                                <div class="message_bubble bubble_me_default">
+                                                    发帖测试2
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="background: white">
+                                    <div id="Editor"></div>
+                                    <div style="display: flex;justify-content: flex-end;padding-bottom: 10px"><button class="btn_send">发送</button> </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--                    消息列表 -->
+
+
+                <!--                    消息列表 -->
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.js"></script>
+<script src="../static/js/jquery.serializejson.js"></script>
+<script src="../static/js/vue.global.js"></script>
+<script src="../static/js/axios.min.js"></script>
+<script src="../static/js/wangEditor.min.js"></script>
+<script src="../static/js/Message.js"></script>
+<script>
+    const Edi = window.wangEditor;
+    const editor = new Edi("#Editor");
+    // editor.config.height = 100;
+    editor.config.menus=[
+        // 'head',
+        // 'bold',
+        // 'fontSize',
+        // 'fontName',
+        // 'italic',
+        // 'indent',
+        // 'quote',
+        'emoticon',
+        'image',
+        // 'undo',
+        // 'redo',
+    ]
+    editor.config.uploadImgShowBase64 = true;
+    editor.config.showLinkImg= false;
+    editor.config.showFullScreen = false;
+    editor.config.onchange = function (){
+
+    }
+    editor.create();
+
+    let eds = document.getElementsByClassName('w-e-text-container')
+    eds[0].style = eds[0].style.cssText + 'border:none; border-top:none; height:100px; z-index:10000;'
+    let eds1 = document.getElementsByClassName('w-e-toolbar')
+    eds1[0].style = eds[0].style.cssText + 'background-color:#FFF; border:none; z-index:10001;height:40px;margin-top:30px'
+
+</script>
+</body>
+</html>

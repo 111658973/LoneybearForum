@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分区管理</title>
+
+    <!--<link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/Pagescss.css">
+    <link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.css">
+    <link rel="stylesheet"
+          href="../../static/bootstrap-3.3.7-dist/plugins/Bootstrap-select v1.13.9/bootstrap-select.min.css">
+
+
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <!--<link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/bootstrap-table-develop/bootstrap-table.css">-->
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="Vue">
+        <div class="overlay"></div>
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        分区管理
+                    </a>
+                </li>
+                <li>
+                    <a class="cursor_pointer" id="nav_data" onclick="show_tn(1)"><i class="fa fa-fw fa-home"></i> 分区资料</a>
+                </li>
+                <li>
+                    <a href="#managers" id="nav_admin" onclick="show_tn(2);getAdminList();"><i
+                            class="fa fa-fw fa-folder"></i> 管理员列表</a>
+                </li>
+                <li>
+                    <a href="#posts" id="nav_posts" onclick="show_tn(3);getPostList();"><i
+                            class="fa fa-fw fa-file-o"></i> 帖子管理</a>
+                </li>
+                <li>
+                    <a href="#good" id="nav_good" onclick="show_tn(4);getGoodList();"><i class="fa fa-fw fa-file-o"></i>
+                        精品区</a>
+                </li>
+                <li>
+                    <a href="#postcycle" id="nav_blacklist" onclick="show_tn(5);getBlackList();"><i
+                            class="fa fa-fw fa-cog"></i> 黑名单</a>
+                </li>
+                <li>
+                    <a href="#recycle" id="nav_recycle" onclick="show_tn(6);getPostCycle();"><i
+                            class="fa fa-fw fa-cog"></i> 帖子回收站</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 其他分区
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">标题</li>
+                        <li><a href="#">分区1</a></li>
+                        <li><a href="#">分区2</a></li>
+                        <li><a href="#">分区3</a></li>
+
+                    </ul>
+                </li>
+                <!--			<li>-->
+                <!--				<a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>-->
+                <!--			</li>-->
+                <!--			<li>-->
+                <!--				<a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>-->
+                <!--			</li>-->
+                <!--			<li>-->
+                <!--				<a href="#"><i class="fa fa-fw fa-twitter"></i> Last page</a>-->
+                <!--			</li>-->
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="container">
+
+                <!--                models-->
+                <div class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="position: relative;top:20%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button id="close_addadmin" type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel1" style="color: black">
+                                    添加管理员
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="input-group">
+                                        <span style="border-bottom-left-radius: 0" class="input-group-addon"
+                                              id="basic-addon">用户</span>
+                                        <input id="admin_query" style="border-bottom-right-radius: 0" name="kw"
+                                               type="text" class="form-control" placeholder="用户名或id"
+                                               aria-describedby="basic-addon1">
+                                    </div>
+                                    <div style="width: 100%;border:#ccc solid 1px;border-top: none">
+                                        <table v-if="showSubTable" id="table_search"></table>
+                                    </div>
+
+                                    <div class="input-group margin_top30px margin_botoom_80">
+                                        <span class="input-group-addon" id="basic-addon">职位</span>
+                                        <select class="selectpicker form-control">
+                                            <optgroup label="分区管理">
+                                                <option value="">吧主</option>
+                                                <!--                                            <option></option>-->
+                                                <!--                                            <option>Relish</option>-->
+                                            </optgroup>
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="addMutiAdmin()">确认</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <div class="modal fade" id="addGoodPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="position: relative;top:20%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" id="close_good" class="close" data-dismiss="modal"
+                                        aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2" style="color: black">
+                                    精品区
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="input-group">
+                                        <span style="border-bottom-left-radius: 0" class="input-group-addon"
+                                              id="basic-addon2">帖子</span>
+                                        <input id="good_query" style="border-bottom-right-radius: 0" type="text"
+                                               class="form-control" placeholder="帖子id或标题"
+                                               aria-describedby="basic-addon1">
+                                    </div>
+                                    <div style="width: 100%;border:#ccc solid 1px;border-top: none">
+                                        <table id="subtable_post"></table>
+                                    </div>
+
+                                    <div class="input-group margin_top30px margin_botoom_80">
+                                        <span class="input-group-addon" id="basic-addon">操作</span>
+                                        <select class="selectpicker form-control">
+                                            <optgroup label="精品区">
+                                                <option value="">加入精品区</option>
+                                                <!--                                            <option></option>-->
+                                                <!--                                            <option>Relish</option>-->
+                                            </optgroup>
+                                            <optgroup label="处理">
+                                                <!--                                                <option value="">删贴</option>-->
+                                                <!--                                    <option value="">精品区</option>-->
+                                                <!--                                            <option></option>-->
+                                                <!--                                            <option>Relish</option>-->
+                                            </optgroup>
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="addGood()">确认</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <div class="modal fade" id="addBlackList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="position: relative;top:20%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" id="close_blacklist" class="close" data-dismiss="modal"
+                                        aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel" style="color: black">
+                                    处理用户
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formBlackList" name="formBlackList">
+                                    <div class="input-group">
+                                        <span style="border-bottom-left-radius: 0;letter-spacing: 13px"
+                                              class="input-group-addon">用户</span>
+                                        <input id="blacklist_query" style="border-bottom-right-radius: 0" type="text"
+                                               class="form-control" placeholder="用户名或id"
+                                               aria-describedby="basic-addon1">
+                                    </div>
+                                    <div style="width: 100%;border:#ccc solid 1px;border-top: none">
+                                        <table id="subtable_blacklist"></table>
+                                    </div>
+                                    <div class="input-group margin_top30px ">
+                                        <span class="input-group-addon" id="basic-addon">处理操作</span>
+                                        <select name="deal" class="selectpicker form-control">
+                                            <optgroup label="停权">
+                                                <option value="封禁">封禁</option>
+                                                <option value="禁言">禁言</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="input-group margin_top30px">
+                                        <span style="border-bottom-left-radius: 0" class="input-group-addon">持续时间</span>
+                                        <select name="time" class="selectpicker form-control">
+                                            <optgroup label="时限">
+                                                <option value="60">1小时</option>
+                                                <option value="1440">1天</option>
+                                                <option value="4320">3天</option>
+                                                <option value="10080">7天</option>
+                                                <option value="43200">30天</option>
+                                                <option value="eternal">永久</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="input-group margin_top30px margin_botoom_80">
+                                        <span style="border-bottom-left-radius: 0" class="input-group-addon">处理原因</span>
+                                        <input style="border-bottom-right-radius: 0" type="text" name="reason"
+                                               id="reason1" class="form-control" placeholder="违规原因"
+                                               aria-describedby="basic-addon1">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span></button>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">辱骂他人</a>
+                                                </li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">发表不当言论</a>
+                                                </li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">发表引战言论</a>
+                                                </li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">传播违法资料</a>
+                                                </li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">其他违规</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="addBlackList()">确认</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <div class="modal fade" id="editBlacklist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="position: relative;top:20%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" id="close_editblacklist" class="close" data-dismiss="modal"
+                                        aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel" style="color: black">
+                                    处理用户
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formeditBlackList" name="formeditBlackList">
+                                    <div class="input-group">
+                                        <span style="border-bottom-left-radius: 0;letter-spacing: 13px"
+                                              class="input-group-addon">用户</span>
+                                        <input name="username" id="editblacklist_query"
+                                               style="border-bottom-right-radius: 0" type="text" class="form-control"
+                                               placeholder="用户名或id" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                    <div style="width: 100%;border:#ccc solid 1px;border-top: none">
+                                        <table id="edit_blacklist_table"></table>
+                                    </div>
+                                    <div class="input-group margin_top30px ">
+                                        <span class="input-group-addon" id="basic-addon">处理操作</span>
+                                        <select name="deal" class="selectpicker form-control">
+                                            <optgroup label="停权">
+                                                <option value="封禁">封禁</option>
+                                                <option value="禁言">禁言</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="input-group margin_top30px">
+                                        <span style="border-bottom-left-radius: 0" class="input-group-addon">持续时间</span>
+                                        <select name="duration" class="selectpicker form-control">
+                                            <optgroup label="时限">
+                                                <option value="60">1小时</option>
+                                                <option value="1440">1天</option>
+                                                <option value="4320">3天</option>
+                                                <option value="10080">7天</option>
+                                                <option value="43200">30天</option>
+                                                <option value="eternal">永久</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="input-group margin_top30px margin_botoom_80">
+                                        <span style="border-bottom-left-radius: 0" class="input-group-addon">处理原因</span>
+                                        <input style="border-bottom-right-radius: 0" type="text" name="reason"
+                                               id="reason2" class="form-control" placeholder="违规原因"
+                                               aria-describedby="basic-addon1">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span></button>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">辱骂他人</a>
+                                                </li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">发表不当言论</a>
+                                                </li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">发表引战言论</a>
+                                                </li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">传播违法资料</a>
+                                                </li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a class="none_underline_link" href="#" onclick="fillReason(this)">其他违规</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="editBlacklist()">确认</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+
+
+                <div class="zonemanage_wrapper">
+                    <div class="zonemanage_container">
+
+                        <div class="zonemanage_zoneinfowrapper" v-show="show_table[0].show_">
+                            <div class="zonmanage_img">
+                                <a onclick="changeImg()"><img id="icon" class="left_narbar_icon"
+                                                              :src="['../'+zone_data.ziconUrl]" alt=""></a>
+                                <form name="form" id="form" enctype="multipart/form-data">
+                                    <input id="file" type="file" accept="image/*" name="file" onchange="PreViewImg()"
+                                           style="display: none">
+                                </form>
+                            </div>
+                            <a class="zone_post_content_tittle none_underline_link" style="margin-left: 35%">{{
+                                zone_data.zname }}分区</a>
+                        </div>
+                        <div class="zonemanage_introduction_wrapper" v-show="show_table[0].show_">
+                            <div class="zonemanage_space_end">
+                                <label class="userdata_zone_tittle">分区介绍</label>
+                                <div>
+                                    <button class="btn btn-default margin_right_10px" onclick="changeIntroduction();">
+                                        编辑
+                                    </button>
+                                    <button class="btn btn-primary " onclick="saveintroduction();">保存</button>
+                                </div>
+                            </div>
+
+                            <textarea id="introduction" name="intro" class="zonemanage_introduction" readonly>{{zone_data.zintroduction}}</textarea>
+                        </div>
+
+
+                        <div class="zonemanage_managers_wrapper" v-show="show_table[1].show_">
+
+                            <div class="zonemanage_space_end">
+                                <label class="userdata_zone_tittle">管理员列表</label>
+                                <div>
+                                    <button class="btn btn-primary margin_right_10px" data-toggle="modal"
+                                            data-target="#addAdmin">添加
+                                    </button>
+                                    <!--                                    <button class="btn btn-default">编辑</button>-->
+                                </div>
+                            </div>
+                            <div class="zonemanage_manager_content">
+                                <table id="table_manager" data-locale="zh-CN"></table>
+
+                                <!--                            <table class="table table-striped table-hover text-center" >-->
+                                <!--                                <tr>-->
+                                <!--                                    <th class="text-center">编号</th>-->
+                                <!--                                    <th class="text-center">头像</th>-->
+                                <!--                                    <th class="text-center">用户名</th>-->
+                                <!--                                    <th class="text-center">职位</th>-->
+                                <!--                                    <th class="text-center">加入时间</th>-->
+                                <!--                                    <th class="text-center">操作</th>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr style="vertical-align: middle" v-for="(m,index) in managers">-->
+                                <!--                                    <td>{{index+1}}</td>-->
+                                <!--                                    <td><img class="mini_data_icon" :src="['../'+m.iconUrl]"></td>-->
+                                <!--                                    <td>{{m.nick}}</td>-->
+                                <!--                                    <td>{{m.authority}}</td>-->
+                                <!--                                    <td>2020-1-1</td>-->
+                                <!--                                    <td>-->
+                                <!--                                        <button class="btn btn-danger">删除</button>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+
+
+                                <!--                            </table>-->
+
+                            </div>
+                        </div>
+
+                        <div class="zonemanage_posts_wrapper" v-show="show_table[2].show_">
+
+                            <div class="zonemanage_space_end">
+                                <label class="userdata_zone_tittle">帖子详情</label>
+                                <div>
+                                    <button class="btn btn-danger" onclick="deletePost()">删除</button>
+                                </div>
+                            </div>
+                            <div class="zonemanage_manager_content">
+                                <table id="table_post" data-locale="zh-CN"></table>
+
+                            </div>
+                        </div>
+
+                        <div class="zonemanage_good_wrapper" v-show="show_table[3].show_">
+
+                            <div class="zonemanage_space_end">
+                                <label class="userdata_zone_tittle">精品区</label>
+                                <div>
+                                    <button class="btn btn-primary margin_right_10px" data-toggle="modal"
+                                            data-target="#addGoodPost">添加
+                                    </button>
+                                    <!--                                    <button class="btn btn-default">编辑</button>-->
+                                </div>
+                            </div>
+                            <div class="zonemanage_manager_content">
+                                <table id="table_good" data-locale="zh-CN"></table>
+                                <!--                            <table class="table table-striped table-hover text-center">-->
+                                <!--                                <tr>-->
+                                <!--                                    <th class="text-center">编号</th>-->
+                                <!--                                    <th class="text-center">帖子id</th>-->
+                                <!--                                    <th class="text-center">发帖人</th>-->
+                                <!--                                    <th class="text-center">标题</th>-->
+                                <!--                                    <th class="text-center">发帖时间</th>-->
+                                <!--                                    <th class="text-center">操作</th>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr v-for="p in good_posts">-->
+                                <!--                                    <td>1</td>-->
+                                <!--                                    <td>{{p.pid}}</td>-->
+                                <!--                                    <td>{{p.authorData.nick}}</td>-->
+                                <!--                                    <td>{{p.ptittle}}</td>-->
+                                <!--                                    <td>2020-1-1</td>-->
+                                <!--                                    <td>-->
+                                <!--                                        <button class="btn btn-danger">删除</button>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+
+                                <!--                            </table>-->
+
+
+                            </div>
+                        </div>
+
+                        <div class="zonemanage_blacklist_wrapper" v-show="show_table[4].show_">
+                            <div class="zonemanage_space_end">
+                                <label class="userdata_zone_tittle">黑名单</label>
+                                <div>
+                                    <button class="btn btn-primary margin_right_10px" data-toggle="modal"
+                                            data-target="#addBlackList">添加
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="table_blacklist" data-locale="zh-CN"></table>
+                            <!--                        <table class="table table-striped table-hover text-center">-->
+                            <!--                            <tr>-->
+                            <!--                                <th class="text-center">编号</th>-->
+                            <!--                                <th class="text-center">用户名</th>-->
+                            <!--                                <th class="text-center">账号状态</th>-->
+                            <!--                                <th class="text-center">封禁分区</th>-->
+                            <!--                                <th class="text-center">违规原因</th>-->
+                            <!--                                <th class="text-center">处理人</th>-->
+                            <!--                                <th class="text-center">处理时间</th>-->
+                            <!--                                <th class="text-center">操作</th>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr v-for="b in black_list">-->
+                            <!--                                <td>{{b.bid}}</td>-->
+                            <!--                                <td>{{b.uid}}</td>-->
+                            <!--                                <td>{{b.status}}</td>-->
+                            <!--                                <td>xx分区</td>-->
+                            <!--                                <td>{{b.reason}}</td>-->
+                            <!--                                <td>{{b.operator}}</td>-->
+                            <!--                                <td>{{b.time}}</td>-->
+                            <!--                                <td>-->
+                            <!--                                    <button class="btn btn-danger">删除</button>-->
+                            <!--                                </td>-->
+                            <!--                            </tr>-->
+
+
+                            <!--                        </table>-->
+                        </div>
+
+                        <div class="zonemanage_postcycle_wrapper" v-show="show_table[5].show_">
+                            <div class="zonemanage_space_end">
+                                <label class="userdata_zone_tittle">帖子回收站</label>
+                            </div>
+                            <div class="zonemanage_manager_content">
+                                <table id="table_postcycle" data-locale="zh-CN"></table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+<script src="../../static/js/jquery-3.6.0.js"></script>
+<script src="../../static/js/jquery.serializejson.js"></script>
+<script src="../../static/js/vue.global.js"></script>
+<script src="../../static/js/axios.min.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table.min.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/bootstrap-table1.18/bootstrap-table-locale-all.js"></script>
+<script src="../../static/bootstrap-3.3.7-dist/plugins/Bootstrap-select v1.13.9/bootstrap-select.min.js"></script>
+
+<script src="../../static/js/zonemanage.js"></script>
+<!--<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+<!--<script src="https://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+        trigger.click(function () {
+            hamburger_cross();
+        });
+
+        function hamburger_cross() {
+
+            if (isClosed == true) {
+                overlay.hide();
+                trigger.removeClass('is-open');
+                trigger.addClass('is-closed');
+                isClosed = false;
+            } else {
+                overlay.show();
+                trigger.removeClass('is-closed');
+                trigger.addClass('is-open');
+                isClosed = true;
+            }
+        }
+
+        $('[data-toggle="offcanvas"]').click(function () {
+            $('#wrapper').toggleClass('toggled');
+        });
+    });
+</script>
+<script>
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="../../static/js/axios.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/Pagescss.css">
+
+</head>
+<body>
+    <div id="Vue1">
+        <h1>1.{{  user  }}</h1>
+        <h1>2.{{ $data.dataObj.pwd }}</h1>
+        <h1>3.{{ $data.dataObj.veri }}</h1>
+
+        <a href="https://www.baidu.com">baidu</a>
+        <!--    跳转到/link-->
+        <a href="https://www.baidu.com" >baidu</a>
+
+        <form name="form1" id="form1" action="/final" method="get">
+            <p><label style="color: red"></label></p>
+                <p><input v-model="username" type="text" name = "username" id="input"></p>
+                <p><input v-model="password" type="password" name="password"></p>
+                <p><input v-model="verifycode" type="text" name="verifycode"></p>
+<!--                <button @click="sendWarp">send warp</button>-->
+<!--                <input type="button" onclick="Vueapp.method.sendWarp()" value="login" id="submit_button" name="sb" style="display: block">-->
+                <input type="button"  id="001" value="warp" onclick="ajax1()">
+
+        </form>
+        <button onclick="Vueapp.method.show1()">{{ }}</button>
+<!--        <button onclick="changeVue()">{{tip_content1}}</button>-->
+<!--        <button onclick="send_post()">send post</button>-->
+        <div class="mini_user_container display_none" id="dynamic_user_data" style="background: #8f9fff" onmouseup="showDynamicUserDataFrame()">
+            <div class="mini_data_icon_container">
+                <a><img class="icon_cirile mini_data_icon" src="../../static/images/users_icons/angry00.png"></a>
+            </div>
+            <div class="mini_data_icon_profile_warpper">
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+            </div>
+        </div>
+        <p><button onclick="Vueapp.method.showAlert()">vueApp.showALert()</button></p>
+        <a href="#"  onmouseenter="showDynamicUserDataFrame()" onmouseleave="hideDynamicUserDataFrame()">显示浮动</a>
+    </div>
+    <script src="../../static/js/jquery-3.6.0.js"></script>
+    <script src="../../static/js/jquery.serializejson.js"></script>
+    <script src="../../static/js/vue.global.js"></script>
+    <script src="../../static/js/axios.min.js"></script>
+    <script src="../../static/js/VueTest.js"></script>
+    <script src="../static/js/Homepage.js"></script>
+
+
+
+
+    <script>
+        function showDynamicUserDataFrame(){
+            document.getElementById("dynamic_user_data").className="mini_user_container";
+        }
+        function hideDynamicUserDataFrame(){
+            document.getElementById("dynamic_user_data").className="mini_user_container display_none";
+        }
+    </script>
+<!--    <script>-->
+<!--        const Vueapp={-->
+<!--            data(){-->
+<!--                return {-->
+<!--                    username:null,-->
+<!--                    password:null,-->
+<!--                    verifycode:null,-->
+<!--                    message:"app started!",-->
+<!--                    tip_content1:"账号密码错误",-->
+<!--                    a1:"找回密码",-->
+<!--                    tip_content2:"验证码错误",-->
+<!--                    dataObj:{-->
+<!--                        acc:null,-->
+<!--                        pwd:null,-->
+<!--                        veri:null-->
+<!--                    }-->
+
+<!--                }-->
+<!--            },-->
+<!--            method: {-->
+<!--                warp() {-->
+<!--                    vueApp.dataObj.acc = vueApp.username;-->
+<!--                    vueApp.dataObj.pwd = vueApp.password;-->
+<!--                    vueApp.dataObj.veri = vueApp.verifycode;-->
+<!--                    alert(vueApp.dataObj.acc + "|" + vueApp.dataObj.pwd + "|" + vueApp.dataObj.veri);-->
+
+<!--                },-->
+<!--                show1() {-->
+<!--                    alert(vueApp.dataObj.acc + "|" + vueApp.dataObj.pwd + "|" + vueApp.dataObj.veri);-->
+<!--                },-->
+<!--            },-->
+<!--            created:function (){-->
+<!--                axios({-->
+<!--                    methods: 'get',-->
+<!--                    url: '/Getreply',-->
+<!--                })-->
+<!--                    .then(function (response) {-->
+<!--                        console.log(response);-->
+<!--                        this.hot_posts=response.data.hot_posts;-->
+<!--                        this.left_nav=response.data.left_nav;-->
+<!--                        this.recommand_zones = response.data.recommand_zones;-->
+<!--                        this.user_data = response.data.user_data;-->
+<!--                        this.username = response.data.user_data.nick;-->
+<!--                        console.log("nick: "+username)-->
+<!--                        console.log(hot_posts);-->
+<!--                        console.log(left_nav);-->
+<!--                        console.log(recommand_zones);-->
+<!--                        console.log(user_data);-->
+<!--                    })-->
+<!--                    .catch(function (error) {-->
+<!--                        console.log(error);-->
+<!--                    })-->
+<!--            }-->
+<!--        }-->
+<!--        // Vue.createApp(Vueapp).mount("#Vue")-->
+<!--        var vueApp = Vue.createApp(Vueapp).mount("#Vuehome");-->
+
+
+<!--        function change(){-->
+<!--            vueApp.dataObj.acc = null;-->
+<!--            vueApp.dataObj.pwd = "chai";-->
+<!--        }-->
+
+
+
+<!--    </script>-->
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+{
+  "pid": 1,
+  "ptittle": "如何开始一个帖子1",
+  "pcreateTime": "2021-03-01 05:00:00",
+  "plastVisitedTime": "2021-03-01 00:00:00",
+  "classfications": null,
+  "plikeCount": 77777,
+  "pdislikeCount": 1111,
+  "zid": 1,
+  "uid": 1,
+  "status": "1",
+  "isGood": true,
+  "firstFloor": {
+    "fid": 2,
+    "pid": 1,
+    "uid": 1,
+    "opposite": 0,
+    "floor": 1,
+    "type": 2,
+    "content": "帖子1一楼",
+    "ftime": "2021-04-07 18:07:21",
+    "floorReplysCount": 0
+  },
+  "floorCount": 22,
+  "authorData": {
+    "email": "Binfeng.chai@gmail.com",
+    "username": "111658973",
+    "displayImgUrl": "../static/images/background/bg11.png",
+    "createDate": "2020-01-01",
+    "lastVisitedTime": "2021-04-25 13:32:54",
+    "phoneNumber": "18571640625",
+    "uuid": "root_001",
+    "lastVisitedIp": "0:0:0:0:0:0:0:1",
+    "nick": "Loneybear",
+    "sex": "男",
+    "status": "正常",
+    "uintroduction": "懒狗",
+    "iconUrl": "../static/images/users_icons/angry00.png",
+    "uid": 1,
+    "authority": 3,
+    "level": 10,
+    "exp": 99999,
+    "enabled": true,
+    "favouriteZoneIdList": [
+      {
+        "zid": 2
+      },
+      {
+        "zid": 3
+      },
+      {
+        "zid": 4
+      },
+      {
+        "zid": 1
+      }
+    ],
+    "favorPostsIdList": [
+      {
+        "pid": 2
+      },
+      {
+        "pid": 3
+      },
+      {
+        "pid": 1
+      },
+      {
+        "pid": 31
+      }
+    ]
+  },
+  "postZoneData": {
+    "zname": "动漫",
+    "zintroduction": "动漫专区",
+    "ziconUrl": "../static/images/page_icons/city.png",
+    "zurl": "Animation",
+    "likeNumber": 0,
+    "zid": 1,
+    "postcount": 9,
+    "zmanagerId": [
+      {
+        "uid": 1
+      }
+    ]
+  }
+}

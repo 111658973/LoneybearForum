@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--验证是否为空，按下登陆后变为登陆中-->
+<head>
+    <meta charset="UTF-8">
+    <title>LoneyForum</title>
+    <link rel="stylesheet" href="../static/css/Pagescss.css">
+    <meta></meta>
+</head>
+<body class="login_body" style="background: url(../static/images/background/bg_login.jpg) no-repeat ;background-size:cover ;">
+<div class="hd">
+    <a href="/homepage" class="logo_link"><img class="logo" src="../static/images/page_icons/run.gif">LoneyBearForum</a>
+</div>
+<div class="login_content" id="Vue">
+    <div class="login_form_warpper">
+        <p id="login_form_tittle">账号密码登陆</p>
+        <form class="login_form"  method="post"  name="content" action="/verify" id="loginForm">
+            <p class="wrong_password_tip1">
+                <span id="tip1"  class="find_password visibility_hidden">{{ tip_content1 }}<a class="color_red" id="tip_a_1" :href="tip1_url">{{a1}}</a></span>
+            </p>
+                <input type="text" v-model="accValue" class="login_input-text" name="username" placeholder="账号" onfocus="clearTip1()">
+                <input type="password"  class="login_input-text" name="password" placeholder="密码" onfocus="clearTip1()">
+                <div class="verifycode_code_wrapper">
+                    <input type="text"  class="login_verify_code_input_text" name="verifyCode"  placeholder="验证码" onfocus="clearTip2()">
+                    <img style="position: absolute;right: 55px;width: 110px;height: 40px;border: #ddd solid 1px" alt="验证码" onclick="this.src='/defaultKaptcha?d=' + new Date()*1" src="/defaultKaptcha"><br>
+                </div>
+
+            <div id="tip2"  class="tip2_div visibility_hidden ">{{ tip_content2 }}</div>
+                        <input id="b" type="submit"  class="login_submit_button enabled" name="登陆" value="登陆" ><br>
+
+<!--                <input type="button"  class="login_submit_button enabled" name="登陆" value="登陆"  onclick="LoginajaxPost()"><br>-->
+<!--                <input type="button" class="login_submit_button" name="testVueData" style="display: block" onclick="changeVue();">-->
+            <div class="submit_warpper">
+                <a href="/reset" class="forget_password_link">忘记密码</a>
+            </div>
+            <div class="custom_signup_warpper">
+                <div class="sign_up_box">
+                    <a class="sign_up_link" href="/signup">立即注册</a>
+                </div>
+                </div>
+
+        </form>
+<!--        <div class="custom_signup_link">-->
+<!--            -->
+<!--        </div>-->
+<!--        <form method="post">PUT方法-->
+<!--            <input name="_method" type="hidden" value="PUT">-->
+<!--            <input value="REST_PUT" type="submit">-->
+<!--        </form>-->
+    </div>
+    <div class="login_footer"></div>
+</div>
+<script src="../static/js/jquery-3.6.0.js"></script>
+<script src="../static/js/jquery.serializejson.js"></script>
+<script src="../static/js/jquery.form.js"></script>
+
+<script src="../static/js/vue.global.js"></script>
+<script src="../static/js/axios.min.js"></script>
+
+<script src="../static/js/LoginAjax.js"></script>
+
+
+
+</body>
+
+</html>
