@@ -1,0 +1,13 @@
+dataSourceKey: defaultDS
+destination: example
+groupId: g1
+esMapping:
+  _index: mytest_user
+  _id: _id
+#  upsert: true
+#  pk: id
+  sql: "select id as _id,name,age,create_time from mytest_user"
+#  objFields:
+#    _labels: array:;
+  etlCondition: "where a.c_time>={}"
+  commitBatch: 3000

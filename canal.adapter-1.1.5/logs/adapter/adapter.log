@@ -1,0 +1,241 @@
+2021-04-26 17:11:52.559 [main] INFO  o.s.c.annotation.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@305b7c14: startup date [Mon Apr 26 17:11:52 CST 2021]; root of context hierarchy
+2021-04-26 17:11:52.878 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$eb614ee] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-26 17:11:53.112 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Failed to load property source from location 'classpath:/application.yml'
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:535) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.loadForFileExtension(ConfigFileApplicationListener.java:494) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:462) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.lambda$null$4(ConfigFileApplicationListener.java:444) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[na:1.8.0_201]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.lambda$load$5(ConfigFileApplicationListener.java:443) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[na:1.8.0_201]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:440) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:331) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.addPropertySources(ConfigFileApplicationListener.java:213) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.postProcessEnvironment(ConfigFileApplicationListener.java:196) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.onApplicationEnvironmentPreparedEvent(ConfigFileApplicationListener.java:183) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.onApplicationEvent(ConfigFileApplicationListener.java:169) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:74) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:358) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:317) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at com.alibaba.otter.canal.adapter.launcher.CanalAdapterApplication.main(CanalAdapterApplication.java:19) [client-adapter.launcher-1.1.5.jar:na]
+Caused by: org.yaml.snakeyaml.parser.ParserException: while parsing a block mapping
+ in 'reader', line 57, column 7:
+        - groupId: g1
+          ^
+expected <block end>, but found BlockMappingStart
+ in 'reader', line 61, column 8:
+           hosts: 127.0.0.1:9200 # 127.0.0. ... 
+           ^
+
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseBlockMappingKey.produce(ParserImpl.java:571) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:157) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.parser.ParserImpl.checkEvent(ParserImpl.java:147) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:227) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:154) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:201) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:152) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:249) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:240) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:228) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:154) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:201) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:152) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:249) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:240) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:228) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:154) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:249) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:240) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:228) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:154) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeDocument(Composer.java:122) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:84) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructor.java:123) ~[snakeyaml-1.19.jar:na]
+	at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:547) ~[snakeyaml-1.19.jar:na]
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:160) ~[spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:138) ~[spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.boot.env.OriginTrackedYamlLoader.load(OriginTrackedYamlLoader.java:72) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.env.YamlPropertySourceLoader.load(YamlPropertySourceLoader.java:50) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.loadDocuments(ConfigFileApplicationListener.java:545) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:515) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	... 21 common frames omitted
+2021-04-26 17:17:25.341 [main] INFO  o.s.c.annotation.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@305b7c14: startup date [Mon Apr 26 17:17:25 CST 2021]; root of context hierarchy
+2021-04-26 17:17:25.722 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$eb614ee] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-26 17:17:26.034 [main] INFO  c.a.otter.canal.adapter.launcher.CanalAdapterApplication - No active profile set, falling back to default profiles: default
+2021-04-26 17:17:26.064 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6d025197: startup date [Mon Apr 26 17:17:26 CST 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@305b7c14
+2021-04-26 17:17:26.759 [main] INFO  org.springframework.cloud.context.scope.GenericScope - BeanFactory id=ba9c0aec-0105-3f1f-b89e-e85c68567039
+2021-04-26 17:17:26.879 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$eb614ee] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-26 17:17:27.209 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2021-04-26 17:17:27.235 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2021-04-26 17:17:27.252 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-04-26 17:17:27.252 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.29
+2021-04-26 17:17:27.266 [localhost-startStop-1] INFO  org.apache.catalina.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/chaibf/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2021-04-26 17:17:27.384 [localhost-startStop-1] INFO  o.a.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-04-26 17:17:27.384 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1320 ms
+2021-04-26 17:17:27.516 [localhost-startStop-1] INFO  o.s.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2021-04-26 17:17:27.523 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2021-04-26 17:17:27.523 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2021-04-26 17:17:27.523 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2021-04-26 17:17:27.523 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2021-04-26 17:17:27.937 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2021-04-26 17:17:28.185 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6d025197: startup date [Mon Apr 26 17:17:26 GMT+08:00 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@305b7c14
+2021-04-26 17:17:28.298 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/syncSwitch/{destination}/{status}],methods=[PUT]}" onto public com.alibaba.otter.canal.client.adapter.support.Result com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.etl(java.lang.String,java.lang.String)
+2021-04-26 17:17:28.300 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/etl/{type}/{key}/{task}],methods=[POST]}" onto public com.alibaba.otter.canal.client.adapter.support.EtlResult com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.etl(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+2021-04-26 17:17:28.300 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/syncSwitch/{destination}],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.String> com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.etl(java.lang.String)
+2021-04-26 17:17:28.301 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/etl/{type}/{task}],methods=[POST]}" onto public com.alibaba.otter.canal.client.adapter.support.EtlResult com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.etl(java.lang.String,java.lang.String,java.lang.String)
+2021-04-26 17:17:28.302 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/destinations],methods=[GET]}" onto public java.util.List<java.util.Map<java.lang.String, java.lang.String>> com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.destinations()
+2021-04-26 17:17:28.302 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/count/{type}/{task}],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.count(java.lang.String,java.lang.String)
+2021-04-26 17:17:28.303 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/count/{type}/{key}/{task}],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.alibaba.otter.canal.adapter.launcher.rest.CommonRest.count(java.lang.String,java.lang.String,java.lang.String)
+2021-04-26 17:17:28.307 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2021-04-26 17:17:28.307 [main] INFO  o.s.w.s.m.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-04-26 17:17:28.353 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2021-04-26 17:17:28.353 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2021-04-26 17:17:28.638 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2021-04-26 17:17:28.647 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Bean with name 'refreshScope' has been autodetected for JMX exposure
+2021-04-26 17:17:28.649 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2021-04-26 17:17:28.649 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Bean with name 'environmentManager' has been autodetected for JMX exposure
+2021-04-26 17:17:28.653 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2021-04-26 17:17:28.670 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2021-04-26 17:17:28.685 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=6d025197,type=ConfigurationPropertiesRebinder]
+2021-04-26 17:17:28.703 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterService - ## syncSwitch refreshed.
+2021-04-26 17:17:28.704 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterService - ## start the canal client adapters.
+2021-04-26 17:17:28.716 [main] INFO  c.a.otter.canal.client.adapter.support.ExtensionLoader - extension classpath dir: /Users/chaibf/Downloads/canal.adapter-1.1.5/plugin
+2021-04-26 17:17:28.801 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterLoader - Load canal adapter: logger succeed
+2021-04-26 17:17:28.826 [main] ERROR c.a.o.canal.adapter.launcher.loader.CanalAdapterLoader - Load canal adapter: es7 failed
+java.lang.RuntimeException: java.lang.IllegalArgumentException: Illegal character in scheme name at index 0: 127.0.0.1:9200
+	at com.alibaba.otter.canal.client.adapter.es7x.ES7xAdapter.init(ES7xAdapter.java:54) ~[client-adapter.es7x-1.1.5-jar-with-dependencies.jar:na]
+	at com.alibaba.otter.canal.adapter.launcher.loader.CanalAdapterLoader.loadAdapter(CanalAdapterLoader.java:225) [client-adapter.launcher-1.1.5.jar:na]
+	at com.alibaba.otter.canal.adapter.launcher.loader.CanalAdapterLoader.init(CanalAdapterLoader.java:56) [client-adapter.launcher-1.1.5.jar:na]
+	at com.alibaba.otter.canal.adapter.launcher.loader.CanalAdapterService.init(CanalAdapterService.java:60) [client-adapter.launcher-1.1.5.jar:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_201]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:365) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:308) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:135) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:422) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1694) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$1(AbstractBeanFactory.java:353) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.getBean(GenericScope.java:390) ~[spring-cloud-context-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.context.scope.GenericScope.get(GenericScope.java:184) ~[spring-cloud-context-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:350) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.cloud.context.scope.refresh.RefreshScope.eagerlyInitialize(RefreshScope.java:126) ~[spring-cloud-context-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.context.scope.refresh.RefreshScope.start(RefreshScope.java:117) ~[spring-cloud-context-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_201]
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:264) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:182) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:144) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:400) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:354) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:888) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:161) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:553) ~[spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at com.alibaba.otter.canal.adapter.launcher.CanalAdapterApplication.main(CanalAdapterApplication.java:19) ~[client-adapter.launcher-1.1.5.jar:na]
+Caused by: java.lang.IllegalArgumentException: Illegal character in scheme name at index 0: 127.0.0.1:9200
+	at java.net.URI.create(URI.java:852) ~[na:1.8.0_201]
+	at com.alibaba.otter.canal.client.adapter.es7x.support.ESConnection.createHttpHost(ESConnection.java:502) ~[client-adapter.es7x-1.1.5-jar-with-dependencies.jar:na]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[na:1.8.0_201]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[na:1.8.0_201]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[na:1.8.0_201]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[na:1.8.0_201]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:545) ~[na:1.8.0_201]
+	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260) ~[na:1.8.0_201]
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:438) ~[na:1.8.0_201]
+	at com.alibaba.otter.canal.client.adapter.es7x.support.ESConnection.<init>(ESConnection.java:83) ~[client-adapter.es7x-1.1.5-jar-with-dependencies.jar:na]
+	at com.alibaba.otter.canal.client.adapter.es7x.ES7xAdapter.init(ES7xAdapter.java:45) ~[client-adapter.es7x-1.1.5-jar-with-dependencies.jar:na]
+	... 42 common frames omitted
+Caused by: java.net.URISyntaxException: Illegal character in scheme name at index 0: 127.0.0.1:9200
+	at java.net.URI$Parser.fail(URI.java:2848) ~[na:1.8.0_201]
+	at java.net.URI$Parser.checkChars(URI.java:3021) ~[na:1.8.0_201]
+	at java.net.URI$Parser.checkChar(URI.java:3031) ~[na:1.8.0_201]
+	at java.net.URI$Parser.parse(URI.java:3047) ~[na:1.8.0_201]
+	at java.net.URI.<init>(URI.java:588) ~[na:1.8.0_201]
+	at java.net.URI.create(URI.java:850) ~[na:1.8.0_201]
+	... 52 common frames omitted
+2021-04-26 17:17:28.837 [main] INFO  c.alibaba.otter.canal.connector.core.spi.ExtensionLoader - extension classpath dir: /Users/chaibf/Downloads/canal.adapter-1.1.5/plugin
+2021-04-26 17:17:28.868 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterLoader - Start adapter for canal-client mq topic: example-g1 succeed
+2021-04-26 17:17:29.011 [Thread-3] INFO  c.a.otter.canal.adapter.launcher.loader.AdapterProcessor - =============> Start to connect destination: example <=============
+2021-04-26 17:17:29.012 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterService - ## the canal client adapters are running now ......
+2021-04-26 17:17:29.040 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2021-04-26 17:17:29.053 [main] ERROR org.apache.catalina.core.StandardService - Failed to start connector [Connector[HTTP/1.1-8081]]
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8081]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:256) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:198) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:300) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:162) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:553) [spring-context-5.0.5.RELEASE.jar:5.0.5.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) [spring-boot-2.0.1.RELEASE.jar:2.0.1.RELEASE]
+	at com.alibaba.otter.canal.adapter.launcher.CanalAdapterApplication.main(CanalAdapterApplication.java:19) [client-adapter.launcher-1.1.5.jar:na]
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1020) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	... 11 common frames omitted
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018) ~[tomcat-embed-core-8.5.29.jar:8.5.29]
+	... 12 common frames omitted
+2021-04-26 17:17:29.057 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8081"]
+2021-04-26 17:17:29.058 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2021-04-26 17:17:29.319 [main] INFO  org.apache.catalina.util.LifecycleBase - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2021-04-26 17:17:29.319 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8081"]
+2021-04-26 17:17:29.319 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8081"]
+2021-04-26 17:17:29.323 [main] INFO  o.s.b.a.logging.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-04-26 17:17:29.326 [main] ERROR o.s.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8081 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8081, or configure this application to listen on another port.
+
+2021-04-26 17:17:29.327 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6d025197: startup date [Mon Apr 26 17:17:26 GMT+08:00 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@305b7c14
+2021-04-26 17:17:29.331 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2021-04-26 17:17:29.332 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans
+2021-04-26 17:17:29.530 [Thread-3] INFO  c.a.otter.canal.adapter.launcher.loader.AdapterProcessor - =============> Subscribe destination: example succeed <=============
+2021-04-26 17:17:30.813 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterService - ## stop the canal client adapters
+2021-04-26 17:17:30.814 [pool-2-thread-1] INFO  c.a.otter.canal.adapter.launcher.loader.AdapterProcessor - destination example is waiting for adapters' worker thread die!
+2021-04-26 17:17:31.574 [pool-2-thread-1] INFO  c.a.otter.canal.adapter.launcher.loader.AdapterProcessor - destination example adapters worker thread dead!
+2021-04-26 17:17:31.575 [pool-2-thread-1] INFO  c.a.otter.canal.adapter.launcher.loader.AdapterProcessor - destination example all adapters destroyed!
+2021-04-26 17:17:31.576 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterLoader - All canal adapters destroyed
+2021-04-26 17:17:31.576 [main] INFO  c.a.o.canal.adapter.launcher.loader.CanalAdapterService - ## canal client adapters are down.
