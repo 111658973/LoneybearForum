@@ -3,7 +3,7 @@
 
 <div style="display: flex;align-items: center">
     <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" width="50px" height="50px" align=center>
-       <a> <font size="30px" color="goldenrod">LoneybearForum</font></a>
+       <a size="30px" color="goldenrod">LoneybearForum</a>
 </div>
 
 
