@@ -5,7 +5,12 @@
     <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" width="50px" height="50px" align=center>
        <a href="#logo" size="30px" color="goldenrod" style="color:red font-size:30px">LoneybearForum</a>
 </div>
-
+<font color=red>实现字体颜色为红色</font>
+<span style="background-color: orange">实现背景填充为橙色</span>
+<font color=#FF69B4>颜色值用十六进制表示，实现字体颜色为“热情的粉红”</font>
+<span style="background-color: #D3D3D3">颜色值用十六进制表示，实现背景填充为“浅灰色”</span>
+<font face="黑体" size=4 color=red >实现字体效果：黑体、4号、红色</font>
+<span style="background-color: #D3D3D3"><font size=4 color=#DC143C>默认字体，猩红色，4号，浅灰色填充</font></span>
 
 ***
 #####   一个基于Spring-Boot和Vue的网络论坛项目
