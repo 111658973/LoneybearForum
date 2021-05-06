@@ -3,7 +3,7 @@
 
 <div style="display: flex;align-items: center">
     <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" width="50px" height="50px">
-    <a class="logo_link" href="#logo" font-family="Copperplate";src=url(https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/fonts/Copperplate.ttc) font-size="30px" color="goldenrod">LoneybearForum</a>
+    <a href="#logo" font-size="30px" size="30px" color="goldenrod">LoneybearForum</a>
 </div>
 
 
