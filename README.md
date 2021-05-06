@@ -5,6 +5,7 @@
     <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" width="50px" height="50px" align=center>
        <a href="#logo" size="30px" color="#223344" style="color:#223344 font-size:30px">LoneybearForum</a>
 </div>
+$\color{FF0000}{红色字}$
 
 
 ***
