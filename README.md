@@ -1,7 +1,37 @@
 #####
-<img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" style="width: 50px;height: 50px;margin-top:0" align="top">
-<a style="vertical-align: center;font-weight: bold;font-size: 30px;text-decoration-line: none;color: goldenrod;font-family: Copperplate" >LoneyBearForum</a>
+[comment]: <> (<img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" style="width: 50px;height: 50px;margin-top:0" align="top">)
+[comment]: <> (<a style="vertical-align: center;font-weight: bold;font-size: 30px;text-decoration-line: none;color: goldenrod;font-family: Copperplate" >LoneyBearForum</a>)
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .logo_icon{
+            width: 50px;
+            height: 50px;
+        }
+        .logo_link{
+            text-decoration: none;
+            color: goldenrod;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: Copperplate;
+            src:url(https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/fonts/Copperplate.ttc);
+        }
+        .flex{
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
 
+<body>
+<div class="flex">
+    <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" class="logo_icon">
+    <a class="logo_link" href="#logo">LoneybearForum</a>
+</div>
+
+</body>
+</html>
 ***
 #####   一个基于Spring-Boot和Vue的网络论坛项目
 ***
