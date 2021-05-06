@@ -55,9 +55,29 @@
   ![管理](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/search.png)
 
 
+### 技术架构图和功能模块
+#### 就看看就行，以后服务肯定还要继续划分，主要模块都没用消息队列，原因是一开始感觉用不到，其实老实说是忘记有这个东西了，后面想加都写的差不多了不想改了
+- LoneybearForum 主要模块
+  ![架构](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/LoneybearFourm.png)
+- LoneyebarForum 消息模块
+  ![架构](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/LoneybearForyum_Message.png)
+
+### 功能模块图
+
+
 ### 有哪些问题
 - 我提到了这个是一个先行体验版，所以我基本是展示一下，我以后这个项目一定会重构的，前后端到架构都会重构，到时候会把分好的各个服务发出来，现在服务就划分了消息和其他两个部分，前端也没单独分出来
-- 页面加载没做loading看起来不太爽
+- 页面加载没做loading看起来不太爽，然后Vue加载会显示一下加载之前的内容，影响观感
+- 不是响应式布局，页面可能会与实物不符合
+- 模块划分不够细，主要是因为懒，加上只有一个人，一个多月
+- 服务器都是一个机器跑的，我自己macbook跑起来压力很大
+- 禁用了缓存，为了方便测试
+- 权限部分问题比较大，整个要重构，针对单个分区的用户处理可能有问题
+- Redis当缓存或者当个中间表可能会更好
+- 搜索模块就基本的搜索，当时没多少时间了
+- 权限和安全这一块不太行，第一次用security还是自学的，以后会认真改
+- 帖子内容发表情存在数据库里的是没有转义的，所以显示不出来
+- 其他问题还有很多，就如前面提到的，只能算一个demo，作为毕业设计已经绰绰有余
 - 你们真要跑估计跑不起来，环境难配置
 
 
