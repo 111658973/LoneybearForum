@@ -1,7 +1,11 @@
 #####
 
+
+<div style="display: flex;align-items: center">
     <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" width="50px" height="50px" align=center>
-    <font size=30px color=goldenrod>LoneybearForum</font>
+    <font size="30px" color="goldenrod">LoneybearForum</font>
+</div>
+
 
 ***
 #####   一个基于Spring-Boot和Vue的网络论坛项目
