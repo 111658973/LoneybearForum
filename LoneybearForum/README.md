@@ -1,28 +1,83 @@
-# 工程简介
+#####
 
-# 延伸阅读
 
-### 记录
-> * 验证账号密码一定要最后验证账号密码是否正确，在使用Bean的情况下一定得先要验证账号是否为空，不然会报错空指针异常
-> * 前端ajax传参数为json对象也就是object对象，后端目前只找到用String获取然后split()拼接，按照网上的教程来说可以创建一个java对象，用List存储或者是Map，或者是用JSON存，可惜我一个都没有成功过。最后老老实实传字符串
-> * switch一定记得加break不然会往下继续执行
-> * Mysql 5.7以后增加了json数据类型，可以用来存列表，我这里用来省略一些关联表，举个例子，用户关注的分区，以前应该需要一个pid-zid的关联表，现在我用json类型存的是[{"zid":1},{"zid":2}]这种json列表形式，用mybatis plus自带的fastjsonhandler处理，实体类中用一个包含两个变量的实体类存储例如zuLink，在user表里面收到的json在user实体类中定义为List<zu_Link>，注意需要在pom.xml引入fastjsonhandler这个类的依赖包
-> * ###薛定谔的JSONObejct
->  遇到一个很奇怪的问题，跟Fastjsonhandeler这个类有关，这个类是用来处理json对象的，这里我用来从mysql数据库中获取一个json类型的数据，用一个新的实体类存这个json对象，由于我是数组型的json对象，因此我用的是List<favouriteZoneIdList'>这个list来存，然后问题来了，数据的确可以获取到，但是你要用前面那个实体类的getter去获取它的话，会报一个JSONObject cannot be cast to favouriteZoneIdList，那我就很疑惑了，明明是用这个实体类存的为什么又变成了JSONObject，那我debug看一下,终于发现了问题
-> ![img.png](img.png) <br>
->  首先编译器的确是把它当做一个实体类的，你可以直接.调用他的getter方法                  
-> ![薛定谔的JSONObject](markdownImgs/SchrodingerJsonObject.png)
+<div style="display: flex;align-items: center">
+    <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/run.gif" width="90px" height="90px" align=center>
+   <img src="https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/logo_Link.png" align=center height="40px"> 
+</div>
 
->  但是他实际是几个JSONObject，但是你要是直接调用他的Object get方法直接会报错，就很奇怪，感觉他就是处于一个不确定的叠加态，你观测的时候他就是一个实体类，但是他一运行你看不到了他就变成两了JSONObject
->  那么最后我是怎么解决的的呢，先把它转换为String，然后用JSONOject的JSON.parseArray(String,favouriteZoneIdList)把它转成一个实体类对象，终于能正常使用他的成员方法了，头一次遇到这种bug，我称它为薛定谔的JSONObject类
-> * ###前后端通过url里面的参数传参数的问题举个例子<br>
-> ![img_1.png](img_1.png)<br>
-> 比如上面这个函数，获取分区的资料，不可能所有的分区url都写映射，因此动态构造分区url，根据url里面的参数名字来查询才是正常操作<br>
-> ![img_2.png](img_2.png)<br>
-> Controller里面用@PathVariable 这个注解来获取url里面的一个参数,{zanme}就是一个参数，然后用一个String类型变量存好了，直接调用带参数的函数
-> * ###前端的异步传输数据<br>
->  ![vue生命周期](markdownImgs/VueLifeCycleEng.jpg)
->  ![vue生命周期](markdownImgs/VueLifeCycleCHS.jpg)
->  异步传输就是发送一个http请求之后会等待响应，一般后台有一个Responsebody返回一个数据，然后把返回的数据放在Vue容器里或者直接jquery操作DOM，我采用的是用axios做异步Vue渲染，但是发现渲染总是会发生在获得数据之前，不管vue的生命周期created还是mounted放都是一样，研究超过一整天的时间后发现了问题，一定需要设置一个手段，让页面停下来等待数据好，这也就是为什么大型网站一般会有个等待过程
-> 我的做法是现在vue挂载的div中设置v-if=false,等数据传完了再给他设置true，可以实现功能，但是这个是最低级的，更高级的是用jquery的$nextTip，和forceUpdate，为什么我用最低级的呢，因为高级的用不成功，可能是前端的整合npm的环境而我是js文件导入的
+
+
+***
+#####   一个基于Spring-Boot和Vue的网络论坛项目
+***
+> 作者的本科毕业设计项目，一个前后端分离的论坛项目,现在充其量是个demo，能跑，作者要去考研跑路了，考完研会详细的重构，所以这是一个先行体验版DEMO，而且的确穷跑不起服务器
+
+### 简要介绍
+- 本项目是作者一个人花了一个半月到两个月时间写出来的，目标是一个前后端分离的网络论坛系统，目标基本实现了，但是又没实现，为什么这么说呢，以为本人以前没有去公司实习过，因此不懂企业级的产品的各种规范
+
+### 技术框架
+- 不得不说用的东西还是挺多的，虽然不一定说都特别熟悉这些东西，但是都是自己写的，还是比较了解，下面列举一下
+- Spring-Boot 2.3.7  不用说都懂
+- Mybatis Plus 3.4.2 也不用说，都懂
+- Redis 6.2.0 当缓存和中间件
+- Kafka 2.7.0 消息模块存用户还没接收的消息
+- Zookeeper 3.7.0 Kafka依赖Zk，用来没干啥
+- Vue3 大家也懂
+- ElasticSearch 7.12.0 搜索模块高亮搜索
+- Nginx 1.20.0 反向代理和负载均衡
+- Mysql 8.0.13
+- AliyunOSS 静态服务器
+- Spring-Security 5.3.6 授权认证
+- Canal 1.1.5 同步Mysql数据到es
+- Spring-Websocket 5.2.12 服务器向用户推送消息，也是消息模块核心
+
+### 部分功能展示
+- 登陆
+  ![登陆](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/login.png)
+- 注册
+  ![注册](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/signup.png)
+- 重置密码
+  ![重置密码](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/reset.png)
+- 首页
+  ![首页](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/main.png)
+- 分区
+  ![分区](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/zone.png)
+- 帖子
+  ![帖子](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/post.png)
+- 个人资料
+  ![个人资料](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/userdata.png)
+- 聊天
+  ![聊天](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/message.png)
+- 管理
+  ![管理](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/manage.png)
+- 搜索
+  ![管理](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/search.png)
+
+
+### 技术架构图和功能模块
+#### 就看看就行，以后服务肯定还要继续划分，主要模块都没用消息队列，原因是一开始感觉用不到，其实老实说是忘记有这个东西了，后面想加都写的差不多了不想改了
+- LoneybearForum 主要模块
+  ![架构](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/LoneybearFourm.png)
+- LoneyebarForum 消息模块
+  ![架构](https://loneybear.oss-cn-shanghai.aliyuncs.com/LoneybearForum/github/images/LoneybearForyum_Message.png)
+
+### 功能模块图
+
+
+### 有哪些问题
+- 我提到了这个是一个先行体验版，所以我基本是展示一下，我以后这个项目一定会重构的，前后端到架构都会重构，到时候会把分好的各个服务发出来，现在服务就划分了消息和其他两个部分，前端也没单独分出来
+- 页面加载没做loading看起来不太爽，然后Vue加载会显示一下加载之前的内容，影响观感
+- 不是响应式布局，页面可能会与实物不符合
+- 模块划分不够细，主要是因为懒，加上只有一个人，一个多月
+- 服务器都是一个机器跑的，我自己macbook跑起来压力很大
+- 禁用了缓存，为了方便测试
+- 权限部分问题比较大，整个要重构，针对单个分区的用户处理可能有问题
+- Redis当缓存或者当个中间表可能会更好
+- 搜索模块就基本的搜索，当时没多少时间了
+- 权限和安全这一块不太行，第一次用security还是自学的，以后会认真改
+- 帖子内容发表情存在数据库里的是没有转义的，所以显示不出来
+- 其他问题还有很多，就如前面提到的，只能算一个demo，作为毕业设计已经绰绰有余
+- 你们真要跑估计跑不起来，环境难配置
+
 
